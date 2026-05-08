@@ -1,8 +1,9 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Activity, Bot, Settings2 } from 'lucide-react';
+import { Bot, Settings2 } from 'lucide-react';
 import { cn } from '@/lib/cn';
+import { SourcesBadge } from './SourcesBadge';
 
 const nav = [
   { href: '/', label: 'Dashboard' },
@@ -10,7 +11,11 @@ const nav = [
   { href: '/playbooks', label: 'Playbooks' },
 ];
 
-export function Header() {
+export function Header({
+  sources,
+}: {
+  sources: { shopify: boolean; meta: boolean; notion: boolean };
+}) {
   const pathname = usePathname();
   return (
     <header className="sticky top-0 z-30 border-b border-bg-border/80 bg-bg/80 backdrop-blur-xl">
@@ -52,10 +57,7 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <span className="hidden items-center gap-2 rounded-full border border-bg-border bg-bg-elev px-2.5 py-1 text-[11px] text-ink-dim sm:inline-flex">
-            <Activity className="h-3 w-3 text-ok live-dot" />
-            Demo data
-          </span>
+          <SourcesBadge sources={sources} />
           <button className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-bg-border bg-bg-elev text-ink-dim transition hover:border-saffron-500/30 hover:text-saffron-300">
             <Settings2 className="h-4 w-4" />
           </button>

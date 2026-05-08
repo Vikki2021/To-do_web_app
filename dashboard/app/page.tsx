@@ -18,9 +18,12 @@ import { TopProducts } from '@/components/TopProducts';
 import { TopAds } from '@/components/TopAds';
 import { FestivalRail } from '@/components/FestivalRail';
 import { Pill } from '@/components/Pill';
-import { agents as runtime, kpis, playbooks, today } from '@/data/mock';
+import { agents as runtime, playbooks } from '@/data/mock';
 import { getAllAgents } from '@/lib/harness';
+import { getDashboardData } from '@/lib/data';
 import { formatINR, formatPct } from '@/lib/cn';
+
+export const revalidate = 60;
 
 const playbookPrompts: Record<string, string> = {
   'daily-ops': 'Run daily ops per .claude/playbooks/daily-ops.md.',
@@ -35,15 +38,22 @@ const playbookPrompts: Record<string, string> = {
     'Run kill-loser per .claude/playbooks/kill-loser.md on the worst current ad set / product.',
 };
 
-export default function HomePage() {
-  const agents = getAllAgents();
+export default async function HomePage() {
+  const [data, agents] = await Promise.all([getDashboardData(), Promise.resolve(getAllAgents())]);
+  const { kpis, revenue7d, topProducts, topAds, festivals, activity, liveSources } = data;
+  const now = new Date();
   const dateLine = new Intl.DateTimeFormat('en-IN', {
     weekday: 'long',
     day: 'numeric',
     month: 'long',
     year: 'numeric',
-  }).format(today);
-  const revDelta = ((kpis.revenueYesterday - kpis.revenue7dAvg) / kpis.revenue7dAvg) * 100;
+  }).format(now);
+  const revDelta = kpis.revenue7dAvg > 0
+    ? ((kpis.revenueYesterday - kpis.revenue7dAvg) / kpis.revenue7dAvg) * 100
+    : 0;
+  const allLive = liveSources.shopify && liveSources.meta && liveSources.notion;
+  const allMock = !liveSources.shopify && !liveSources.meta && !liveSources.notion;
+  const modeLabel = allLive ? 'Live · Production' : allMock ? 'Demo data' : 'Hybrid · partial live';
 
   return (
     <div className="space-y-10">
@@ -51,8 +61,8 @@ export default function HomePage() {
       <section className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
         <div>
           <div className="flex items-center gap-2">
-            <Pill tone="saffron" size="sm">Live · Demo data</Pill>
-            <span className="text-xs text-ink-muted">{dateLine} · 09:30 IST</span>
+            <Pill tone={allLive ? 'ok' : allMock ? 'warn' : 'saffron'} size="sm">{modeLabel}</Pill>
+            <span className="text-xs text-ink-muted">{dateLine}</span>
           </div>
           <h1 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
             Namaste, operator. <span className="gradient-text">Aaj ka plan ready hai.</span>
@@ -85,15 +95,15 @@ export default function HomePage() {
         <KpiCard
           label="Revenue today"
           value={formatINR(kpis.revenueToday)}
-          delta={`vs yesterday`}
+          delta={liveSources.shopify ? 'live' : 'mock'}
           deltaTone="neutral"
-          hint="so far · 09:30 IST"
+          hint="so far · today"
           icon={<IndianRupee className="h-4 w-4" />}
         />
         <KpiCard
           label="Yesterday final"
           value={formatINR(kpis.revenueYesterday)}
-          delta={formatPct(revDelta)}
+          delta={kpis.revenue7dAvg > 0 ? formatPct(revDelta) : '—'}
           deltaTone={revDelta >= 0 ? 'up' : 'down'}
           hint={`7d avg ${formatINR(kpis.revenue7dAvg)}`}
           icon={<IndianRupee className="h-4 w-4" />}
@@ -101,7 +111,7 @@ export default function HomePage() {
         <KpiCard
           label="7d ad spend"
           value={formatINR(kpis.spend7d)}
-          hint="Meta + Google blended"
+          hint={liveSources.meta ? 'Meta · live' : 'Meta · mock'}
           icon={<Wallet className="h-4 w-4" />}
         />
         <KpiCard
@@ -148,7 +158,7 @@ export default function HomePage() {
             }
           />
           <CardBody>
-            <RevenueChart />
+            <RevenueChart data={revenue7d} />
           </CardBody>
         </Card>
 
@@ -159,7 +169,7 @@ export default function HomePage() {
             right={<UsersRound className="h-4 w-4 text-ink-muted" />}
           />
           <CardBody>
-            <FestivalRail />
+            <FestivalRail data={festivals} />
           </CardBody>
         </Card>
       </section>
@@ -215,16 +225,22 @@ export default function HomePage() {
       {/* Tables + activity */}
       <section className="grid grid-cols-1 gap-4 xl:grid-cols-3">
         <Card className="xl:col-span-2">
-          <CardHeader title="Top products · last 7d" subtitle="By revenue · with margin and RTO" />
+          <CardHeader
+            title="Top products · last 7d"
+            subtitle={liveSources.shopify ? 'Live from Shopify · margin from launch briefs' : 'Demo data'}
+          />
           <CardBody>
-            <TopProducts />
+            <TopProducts data={topProducts} />
           </CardBody>
         </Card>
 
         <Card>
-          <CardHeader title="Activity feed" subtitle="Most recent agent decisions and alerts" />
+          <CardHeader
+            title="Activity feed"
+            subtitle={liveSources.notion ? 'Live from Notion Daily Standup' : 'Demo data'}
+          />
           <CardBody>
-            <ActivityFeed />
+            <ActivityFeed data={activity} />
           </CardBody>
         </Card>
       </section>
@@ -233,10 +249,10 @@ export default function HomePage() {
         <Card>
           <CardHeader
             title="Top ad sets · last 7d"
-            subtitle="Sorted by spend · ROAS-tagged · auto-decisions per ad-scaling-rules"
+            subtitle={liveSources.meta ? 'Live from Meta Marketing API' : 'Demo data — wire META_ACCESS_TOKEN to go live'}
           />
           <CardBody>
-            <TopAds />
+            <TopAds data={topAds} />
           </CardBody>
         </Card>
       </section>

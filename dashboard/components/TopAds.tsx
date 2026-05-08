@@ -1,5 +1,5 @@
 import { Pill, type PillTone } from './Pill';
-import { topAds } from '@/data/mock';
+import type { TopAd } from '@/data/mock';
 import { formatINR } from '@/lib/cn';
 
 const statusTone: Record<string, PillTone> = {
@@ -9,7 +9,10 @@ const statusTone: Record<string, PillTone> = {
   killed: 'bad',
 };
 
-export function TopAds() {
+export function TopAds({ data }: { data: TopAd[] }) {
+  if (!data.length) {
+    return <p className="py-6 text-center text-sm text-ink-muted">No active ad sets.</p>;
+  }
   return (
     <div className="overflow-x-auto scroll-thin">
       <table className="w-full min-w-[640px] border-separate border-spacing-y-1 text-left text-sm">
@@ -24,7 +27,7 @@ export function TopAds() {
           </tr>
         </thead>
         <tbody>
-          {topAds.map((a) => {
+          {data.map((a) => {
             const roasTone: PillTone = a.roas >= 2.5 ? 'ok' : a.roas >= 1.6 ? 'saffron' : 'bad';
             return (
               <tr key={a.name} className="rounded-xl bg-bg-elev/60 transition hover:bg-bg-elev">

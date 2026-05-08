@@ -6,7 +6,7 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import { cn } from '@/lib/cn';
-import { activity } from '@/data/mock';
+import type { ActivityEvent } from '@/data/mock';
 
 const kindIcon: Record<string, LucideIcon> = {
   decision: CheckCircle2,
@@ -22,7 +22,7 @@ const kindColor: Record<string, string> = {
   handoff: 'text-teal-300',
 };
 
-function relTime(iso: string, now = new Date('2026-05-05T09:35:00+05:30')): string {
+function relTime(iso: string, now = new Date()): string {
   const t = new Date(iso).getTime();
   const diff = Math.max(0, now.getTime() - t);
   const m = Math.floor(diff / 60000);
@@ -34,10 +34,13 @@ function relTime(iso: string, now = new Date('2026-05-05T09:35:00+05:30')): stri
   return `${d}d ago`;
 }
 
-export function ActivityFeed() {
+export function ActivityFeed({ data }: { data: ActivityEvent[] }) {
+  if (!data.length) {
+    return <p className="py-6 text-center text-sm text-ink-muted">No recent activity.</p>;
+  }
   return (
     <ol className="space-y-3">
-      {activity.map((e, i) => {
+      {data.map((e, i) => {
         const Icon = kindIcon[e.kind] ?? Sparkles;
         return (
           <li
