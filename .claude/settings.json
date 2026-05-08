@@ -42,6 +42,7 @@
       "mcp__ff4abc2a-3b1b-4ed7-890e-f8857d542c6b__get-inventory-levels",
       "mcp__ff4abc2a-3b1b-4ed7-890e-f8857d542c6b__run-analytics-query",
       "mcp__ff4abc2a-3b1b-4ed7-890e-f8857d542c6b__graphql_query",
+      "mcp__ff4abc2a-3b1b-4ed7-890e-f8857d542c6b__graphql_mutation",
       "mcp__ff4abc2a-3b1b-4ed7-890e-f8857d542c6b__graphql_schema",
       "mcp__ff4abc2a-3b1b-4ed7-890e-f8857d542c6b__search_docs_chunks",
       "mcp__ff4abc2a-3b1b-4ed7-890e-f8857d542c6b__validate_graphql_codeblocks",
@@ -168,7 +169,6 @@
       "mcp__ff4abc2a-3b1b-4ed7-890e-f8857d542c6b__add-to-collection",
       "mcp__ff4abc2a-3b1b-4ed7-890e-f8857d542c6b__set-inventory",
       "mcp__ff4abc2a-3b1b-4ed7-890e-f8857d542c6b__create-discount",
-      "mcp__ff4abc2a-3b1b-4ed7-890e-f8857d542c6b__graphql_mutation",
       "mcp__ff4abc2a-3b1b-4ed7-890e-f8857d542c6b__switch-shop",
 
       "mcp__132e1d02-a096-4f3a-9651-46785f2dd39b__ads_create_campaign",
