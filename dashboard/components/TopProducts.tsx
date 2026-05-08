@@ -1,8 +1,11 @@
 import { Pill } from './Pill';
-import { topProducts } from '@/data/mock';
+import type { TopProduct } from '@/data/mock';
 import { formatINR } from '@/lib/cn';
 
-export function TopProducts() {
+export function TopProducts({ data }: { data: TopProduct[] }) {
+  if (!data.length) {
+    return <p className="py-6 text-center text-sm text-ink-muted">No product sales yet.</p>;
+  }
   return (
     <div className="overflow-x-auto scroll-thin">
       <table className="w-full min-w-[560px] border-separate border-spacing-y-1 text-left text-sm">
@@ -17,7 +20,7 @@ export function TopProducts() {
           </tr>
         </thead>
         <tbody>
-          {topProducts.map((p) => {
+          {data.map((p) => {
             const rtoTone = p.rtoPct < 20 ? 'ok' : p.rtoPct < 25 ? 'warn' : 'bad';
             return (
               <tr key={p.sku} className="rounded-xl bg-bg-elev/60 transition hover:bg-bg-elev">
@@ -28,7 +31,7 @@ export function TopProducts() {
                 <td className="px-3 py-3 text-right text-ink-dim">{p.marginPct}%</td>
                 <td className="rounded-r-xl px-3 py-3 text-right">
                   <Pill tone={rtoTone} size="sm">
-                    {p.rtoPct}%
+                    {p.rtoPct.toFixed(0)}%
                   </Pill>
                 </td>
               </tr>

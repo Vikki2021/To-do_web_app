@@ -1,20 +1,25 @@
 import { CalendarHeart } from 'lucide-react';
-import { upcomingFestivals } from '@/data/mock';
+import type { FestivalEvent } from '@/data/mock';
 
-function daysUntil(target: string, today = new Date('2026-05-05T00:00:00+05:30')) {
+function daysUntil(target: string, today = new Date()) {
   const t = new Date(target).getTime();
-  const diff = Math.ceil((t - today.getTime()) / (24 * 3600 * 1000));
+  const start = new Date(today);
+  start.setHours(0, 0, 0, 0);
+  const diff = Math.ceil((t - start.getTime()) / (24 * 3600 * 1000));
   return Math.max(0, diff);
 }
 
-export function FestivalRail() {
+export function FestivalRail({ data }: { data: FestivalEvent[] }) {
+  if (!data.length) {
+    return <p className="py-4 text-sm text-ink-muted">No upcoming festivals on the horizon.</p>;
+  }
   return (
     <div className="space-y-2">
-      {upcomingFestivals.map((f) => {
+      {data.slice(0, 6).map((f) => {
         const d = daysUntil(f.date);
         return (
           <div
-            key={f.name}
+            key={`${f.name}-${f.date}`}
             className="flex items-center gap-3 rounded-xl border border-bg-border bg-bg-elev px-3 py-2.5"
           >
             <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-saffron-500/30 bg-saffron-500/10 text-saffron-300">
