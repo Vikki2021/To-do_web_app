@@ -38,9 +38,10 @@ Databases to create on first run:
 
 Recurring events you create:
 - Daily 9:30 IST — "Daily Ops" (15 min) — runs `daily-ops` playbook
+- Daily 10:00 IST — "COD Verify" (5 min) — runs `cod-verification-daily` playbook
 - Friday 17:00 IST — "Weekly Review" (45 min) — runs `weekly-review`
 - Per-product launch — "Launch: <product>" with sub-events for creative due, ads live, day-7 review
-- Per festival — block sale prep T-21, T-14, T-7, T-3, T-0 from event
+- Per festival — block sale prep T-21, T-14, T-7, T-3, T-0 from event (use `inventory-thresholds` skill to set the festival-stock multiplier on the T-21 event)
 
 For new events, always check operator's free time via `suggest_time` before booking.
 
@@ -81,3 +82,5 @@ For advertorial / pre-sell pages:
 - Plan finalized → trigger relevant pillar agents
 - Landing page live → `ads-manager`
 - Reporting flow built → `marketing-analytics`
+- Festival window opening (T-21) → coordinate with `inventory-planner` (set stock multipliers per `inventory-thresholds`) and `email-marketer` (queue broadcasts)
+- New playbook or SOP added → keep CLAUDE.md's playbook list in sync

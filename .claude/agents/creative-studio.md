@@ -64,4 +64,5 @@ Burn in captions. Loud first frame. Hook in the first 0.8 seconds.
 
 - Creatives done → `ads-manager` to upload to Meta Ads and build ad sets
 - Product imagery done → `store-manager` to attach to Shopify product
+- Email/WhatsApp broadcast creative (festival banners, win-back hero images) → deliver to `email-marketer` for the campaign
 - Need landing page imagery → coordinate with `ops-planner` for Vercel asset pipeline
