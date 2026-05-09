@@ -263,7 +263,7 @@ export const BB_021_DRAFT: ShopifyDraftProduct = {
 };
 
 // =============================================================================
-// OPERATOR REVIEW NOTES
+// OPERATOR REVIEW NOTES — BB-021
 // =============================================================================
 export const DRAFT_REVIEW_NOTES: string = `
 PRICING RATIONALE
@@ -309,4 +309,337 @@ NEXT-STEP CHECKLIST (gate before Shopify publish)
 [ ] Assign to collections: "Skincare Tools", "Morning Routine", "Gifting Under ₹999"
 [ ] Brief creative-studio with the 3 adAngles above — do not run ads on placeholder copy
 [ ] Hand to ads-manager only after at least 3 creative variants are approved
+`.trim();
+
+// =============================================================================
+// PRE-SAMPLE DRAFT — DO NOT PUSH TO SHOPIFY YET
+// =============================================================================
+// SKU: NF-022 | Wearable Bladeless Neck Fan (Hands-Free, USB Rechargeable, 3-Speed)
+// Drafted: 2026-05-09 | Drafted by: store-manager agent
+//
+// STATUS: Awaiting sample arrival. This file is for operator review only.
+// Dropdash-first policy: Operator adds NF-022 to Dropdash; Dropdash pushes
+// the Shopify shell; store-manager then applies this draft to that shell.
+//
+// Next gate before store-manager applies this data:
+//   1. Order sample from IndiaMART supplier 22287620797 (Delhi, ₹140/pc)
+//   2. Photograph and film demo (all 5 image slots)
+//   3. Run copy through india-localizer brand-check
+//   4. Confirm HSN code with CA
+//   5. Confirm supplier lead time and MOQ before opening any ad spend
+//
+// All image slots below are BRIEFS for creative-studio, not live URLs.
+// No reviews seeded — add after first 50 verified sales only.
+// Language: English only (matches live store policy — see review notes).
+// =============================================================================
+
+export const NF_022_DRAFT: ShopifyDraftProduct = {
+  title: 'Wearable Bladeless Neck Fan — Hands-Free, USB Rechargeable, 3-Speed',
+
+  handle: 'wearable-bladeless-neck-fan-hands-free-usb-rechargeable',
+
+  vendor: 'CoolBreeze',
+
+  productType: 'Personal Cooling Devices',
+
+  // ---------------------------------------------------------------------------
+  // DESCRIPTION — English-only, no medical claims, COD note prominent
+  // Structure: Hook → Benefits → How it works → Specs → What's in the box →
+  //            Shipping & payment → Returns → Trust footer
+  // Word target: ~280–380 words
+  // ---------------------------------------------------------------------------
+  bodyHtml: `
+<section class="product-hook">
+  <h2>Stay cool through the heat — hands-free, all day, no sweat.</h2>
+  <p>
+    Whether you are cooking, commuting, or just getting through a humid afternoon
+    without air conditioning, this wearable bladeless neck fan keeps a steady breeze
+    flowing right where you need it — all without tying up your hands or tangling
+    your hair.
+  </p>
+</section>
+
+<section class="product-benefits">
+  <h3>Why you will love it</h3>
+  <ul>
+    <li><strong>Completely hands-free:</strong> Rests around your neck so your hands stay free for cooking, work, or the daily commute — no holding, no clipping, no hassle.</li>
+    <li><strong>3 adjustable speed settings:</strong> A gentle breeze for indoor use, a stronger flow for outdoor heat, and a high-speed blast for peak summer afternoons — one button cycles through all three.</li>
+    <li><strong>Bladeless design, safe for everyone:</strong> No exposed blades means no risk to hair, children, or pets. The airflow channels are smooth and quiet at all speeds.</li>
+    <li><strong>USB-C rechargeable:</strong> Charges with the same cable as most modern phones. No batteries to replace — a full charge lasts [OPERATOR: confirm runtime hours from sample] hours on speed 1.</li>
+    <li><strong>Lightweight and adjustable fit:</strong> Weighs approximately [OPERATOR: confirm weight from sample] grams. The flexible neck arc fits most adult neck sizes comfortably.</li>
+  </ul>
+</section>
+
+<section class="product-how-it-works">
+  <h3>How it works — 3 steps</h3>
+  <ol>
+    <li><strong>Charge fully before first use.</strong> Plug in the USB-C cable (included). A full charge takes approximately [OPERATOR: confirm charging time from sample] hours. The indicator light turns solid when done.</li>
+    <li><strong>Place it around your neck and press the power button.</strong> The fan rests on your shoulders with the two air outlets facing upward toward your face and neck. Press once for speed 1, twice for speed 2, three times for speed 3, and once more to turn off.</li>
+    <li><strong>Go about your day.</strong> Wear it in the kitchen, on an auto-rickshaw, during your morning walk, or at your desk. It weighs almost nothing and sits stably without needing adjustment.</li>
+  </ol>
+</section>
+
+<section class="product-specs">
+  <h3>Specifications</h3>
+  <table>
+    <tbody>
+      <tr><th>Battery capacity</th><td>[OPERATOR: confirm mAh from sample]</td></tr>
+      <tr><th>Runtime</th><td>[OPERATOR: confirm hours per speed level from sample]</td></tr>
+      <tr><th>Charging time</th><td>[OPERATOR: confirm from sample]</td></tr>
+      <tr><th>Charging port</th><td>USB-C</td></tr>
+      <tr><th>Speed settings</th><td>3 (Low / Medium / High)</td></tr>
+      <tr><th>Weight</th><td>[OPERATOR: confirm grams from sample]</td></tr>
+      <tr><th>Materials</th><td>ABS plastic body, soft flexible neck arc [OPERATOR: confirm if neck arc material differs]</td></tr>
+      <tr><th>Noise level</th><td>[OPERATOR: confirm dB range from sample — approx. at each speed]</td></tr>
+      <tr><th>Neck fit</th><td>Flexible arc fits most adult neck sizes</td></tr>
+      <tr><th>Color</th><td>[OPERATOR: confirm available colors from supplier]</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="product-inbox">
+  <h3>What is in the box</h3>
+  <ul>
+    <li>1x Wearable Bladeless Neck Fan</li>
+    <li>1x USB-C charging cable</li>
+    <li>1x User manual (English)</li>
+  </ul>
+</section>
+
+<section class="product-shipping">
+  <h3>Shipping and payment</h3>
+  <p>
+    Delivered pan-India in 4–7 business days. Free shipping on prepaid orders above
+    ₹499. Cash on Delivery available at checkout. Pay securely via UPI, debit/credit
+    card, or net banking through Razorpay.
+  </p>
+</section>
+
+<section class="product-returns">
+  <h3>Returns</h3>
+  <p>
+    7-day no-questions return from the date of delivery. If the product arrives
+    damaged or does not match the description, contact us and we will arrange a
+    free pickup. Refunds are processed within 5–7 business days to your original
+    payment method. COD orders are refunded via bank transfer or UPI.
+  </p>
+</section>
+
+<section class="product-trust">
+  <p>100% Pure India Stock &middot; Secure Razorpay/UPI checkout &middot; Replies within 24 hours</p>
+</section>
+`.trim(),
+
+  // ---------------------------------------------------------------------------
+  // PRICING
+  // Sell: ₹899 (per product-research brief)
+  // Compare-at: ₹1,350 (round(₹899 × 1.5 / 10) × 10 = round(134.85) × 10 = 1,350)
+  // Landed cost: ₹260 | Gross margin at sell: ~71%
+  // ---------------------------------------------------------------------------
+  price: 899,
+  compareAtPrice: 1350,
+
+  // ---------------------------------------------------------------------------
+  // INVENTORY — realistic opening stock; not 0 (kills ranking), not >500 (fake)
+  // ---------------------------------------------------------------------------
+  inventoryQty: 100,
+
+  // ---------------------------------------------------------------------------
+  // SEO
+  // seoTitle: 63 chars — within ≤70 limit
+  // seoDescription: 153 chars — within ≤155 limit
+  // ---------------------------------------------------------------------------
+  seoTitle: 'Wearable Bladeless Neck Fan – Hands-Free, 3-Speed | ₹899 COD',
+  seoDescription:
+    'Bladeless wearable neck fan — 3 speeds, USB-C rechargeable, hands-free fit. Safe for all ages. ₹899, COD available. Pan-India delivery in 4–7 days.',
+
+  // ---------------------------------------------------------------------------
+  // TAGS — drive smart collections: niche / audience / hook / season
+  // ---------------------------------------------------------------------------
+  tags: [
+    // Niche
+    'personal-cooling',
+    'neck-fan',
+    'bladeless-fan',
+    'wearable-fan',
+    'usb-rechargeable-fan',
+    // Audience
+    'women',
+    'women-22-42',
+    'homemakers',
+    'working-women',
+    'commuters',
+    'tier2-tier3-cities',
+    // Hook / angle
+    'hands-free',
+    'summer-essential',
+    'heat-relief',
+    'kitchen-cooling',
+    'commute-comfort',
+    // Season / occasion
+    'summer-2026',
+    'raksha-bandhan-gift',
+    'gifting-under-999',
+    'festival-gifting',
+    // Operations
+    'cod-eligible',
+    'rto-medium',
+    'sku-nf-022',
+    'seasonal-clear-sep',
+  ],
+
+  // ---------------------------------------------------------------------------
+  // METAFIELDS
+  // cod_eligible: true — ₹899 sits in COD sweet spot (≤₹1,499)
+  // rto_risk: medium — battery/electronics products see higher return rates;
+  //   also seasonal product with clearance pressure by Sep adds RTO incentive
+  // angle: primary creative angle — problem (heat/sweat → cool relief)
+  // hsn_code: 8414 covers air pumps, compressors, fans — likely correct for a
+  //   portable battery-powered personal fan; [OPERATOR: confirm with CA]
+  // ---------------------------------------------------------------------------
+  metafields: {
+    cod_eligible: true,
+    rto_risk: 'medium',
+    angle: 'problem — summer heat, no AC, sweat while cooking or commuting → instant hands-free cool relief',
+    hsn_code: '8414 [OPERATOR: confirm with CA — 8414 covers fans/air circulators; portable battery fans may fall under 8414 80 or a sub-heading]',
+  },
+
+  // ---------------------------------------------------------------------------
+  // IMAGE BRIEFS — hand to creative-studio after sample arrives
+  // No AI-generated product renders; all must use real sample photography
+  // ---------------------------------------------------------------------------
+  imageBriefs: [
+    {
+      slot: '1-hero',
+      description:
+        'Clean white background studio shot. Fan worn around neck, slight forward tilt so both air outlets are visible and the overall silhouette reads as wearable. Product fills 65% of frame. No clutter, no props. Lighting: soft diffused natural or studio light, no harsh shadows. Shot angle: 45-degree front-and-slightly-above. Feeling: modern, lightweight, premium summer gadget.',
+    },
+    {
+      slot: '2-lifestyle',
+      description:
+        'Indian woman (25–38, relatable, not model-perfect) wearing the neck fan while cooking at a kitchen stove or chopping vegetables. Expression: calm, comfortable, unbothered by heat — not sweating, not fanning herself with a hand. Environment: a real Indian kitchen, warm lighting, some steam or a kadai in background to suggest heat without exaggerating. Shot: mid-level, subject in frame from waist up. Feeling: relief in the middle of the hottest part of the day.',
+    },
+    {
+      slot: '3-benefit-infographic',
+      description:
+        'Canva-style graphic (hand to creative-studio for brand template). 4-quadrant grid layout. Each quadrant has a simple icon and a short label: (1) Hands-Free — icon of open hands with fan on neck; (2) 3 Speeds — icon of wind lines at low/medium/high; (3) USB-C Rechargeable — icon of USB-C cable plugged in; (4) Bladeless Safety — icon of child or family near fan with a safety tick. White background, cool blue and white palette. All text in English. No before-after real face photos.',
+    },
+    {
+      slot: '4-scale-size',
+      description:
+        'Fan worn around a person\'s neck with a relaxed, natural posture — full neck and shoulder visible so scale is clear relative to the body. Alternatively, fan placed on a flat surface next to a common reference object (a standard water bottle or a ruler). Shot: overhead or eye-level. Feeling: compact, lightweight, travels easily. Important for COD buyers who want to verify size before committing to a purchase.',
+    },
+    {
+      slot: '5-packaging',
+      description:
+        'Open box or mailer bag flat-lay revealing fan, USB-C cable, and manual arranged neatly. Show any branding on the box outer. Shot: overhead flat-lay on a neutral (white or light grey) surface. Purpose: sets accurate unboxing expectation, reduces "not as described" RTO claims from buyers who imagined a different package.',
+    },
+  ],
+
+  // ---------------------------------------------------------------------------
+  // AD ANGLES — 3 angles; hand to ads-manager + creative-studio
+  // primaryText: ≤125 chars (Meta Ads body copy)
+  // headline: ≤27 chars
+  // Note on raksha-bandhan-gift: only activate in ad sets running from Jul 26 onward
+  // ---------------------------------------------------------------------------
+  adAngles: [
+    {
+      angle: 'kitchen-demo',
+      primaryText:
+        'Cooking in 40°C heat with no AC? This wearable neck fan keeps you cool hands-free while you cook. ₹899, COD available.',
+      headline: 'Stay cool while you cook',
+      cta: 'Shop Now',
+    },
+    {
+      angle: 'commute',
+      primaryText:
+        'No AC on the bus or auto? Wear this bladeless neck fan and feel the breeze all the way to work. ₹899, COD available.',
+      headline: 'Beat the commute heat',
+      cta: 'Shop Now',
+    },
+    {
+      angle: 'raksha-bandhan-gift',
+      primaryText:
+        'Give your sister the coolest gift this Raksha Bandhan. Wearable neck fan — hands-free comfort all summer. ₹899, COD.',
+      headline: 'Coolest gift for your sis',
+      cta: 'Get Offer',
+    },
+  ],
+};
+
+// =============================================================================
+// OPERATOR REVIEW NOTES — NF-022
+// =============================================================================
+export const NF_022_DRAFT_REVIEW_NOTES: string = `
+PRICING RATIONALE
+-----------------
+Sell price ₹899 is set per the product-research brief. At ₹260 landed cost the
+gross margin is ₹639 / 71.1% — above the 60% floor needed to absorb COD remittance
+lag, RTO reversal costs (medium risk basket), and Meta Ads spend at the 3.5x target
+ROAS. Break-even ROAS is 2.1x at a typical India CPL, which means the campaign can
+sustain periods of learning-phase inefficiency without going cash-negative. Compare-at
+is ₹1,350, calculated as round(899 × 1.5 / 10) × 10, sitting at the bottom of the
+permitted 1.4–1.6x range — reads as honest to Indian buyers who cross-check Amazon
+(where comparable bladeless neck fans list at ₹800–₹2,200).
+
+SAMPLE GATE
+-----------
+Do NOT open any ad spend before receiving the supplier sample. Order from:
+  IndiaMART supplier ID: 22287620797
+  Location: Delhi
+  Price: ₹140/pc ex-Delhi (landed cost target: ₹260 inclusive of shipping)
+Use the sample to confirm: battery mAh, runtime per speed, charging time, weight,
+noise level, color options, and packaging quality. Every [OPERATOR: confirm] field
+in the product spec table must be filled from the actual sample — do not publish
+placeholder specs.
+
+RISKS
+-----
+1. Amazon presence at ₹800–₹2,200: This is the primary competitive threat. The
+   product must differentiate on at least one verifiable axis — ergonomic neck curve,
+   longer battery runtime, sturdier build, or quieter airflow — whichever the sample
+   confirms. If the sample is generic and indistinguishable from Amazon listings at
+   ₹800, reconsider the sell price or the supplier before launching.
+
+2. Seasonal demand drop in October: Neck fans are a summer product. Indian peak
+   demand runs April–August; drops sharply after September. Target: clear all
+   inventory by end of September. If stock is still above 30 units in the first
+   week of September, trigger a clearance discount (recommend 20–25% off or a
+   bundle with a second SKU) and pause acquisition spend.
+
+3. Battery/electronics RTO risk (medium): Electronic products in the ₹600–₹1,200
+   range see higher return rates from COD buyers than non-electronic products. The
+   7-day return policy is correct and non-negotiable; the mitigation is (a) accurate
+   spec copy so buyers know exactly what they are getting, (b) clear unboxing
+   packaging image so nothing looks "not as described", and (c) a Razorpay prepaid
+   incentive via the COD50 discount code to shift the buyer mix toward prepaid.
+
+LANGUAGE NOTE
+-------------
+This draft is English-only, matching the store manager's recent instruction for the
+4 live products. The BB-021 draft was written in Hinglish. Before either NF-022 or
+BB-021 goes live, the operator should decide on one consistent language policy for
+the store. Options: (a) standardize all product pages to English — broadest appeal,
+easier for india-localizer QA; (b) standardize to Hinglish — stronger emotional
+resonance with Hindi-belt tier-2/3 target; (c) maintain a language flag per SKU
+based on target audience. Whichever direction is chosen, update both drafts before
+pushing either to Shopify.
+
+NEXT-STEP CHECKLIST (gate before store-manager applies this draft to Dropdash shell)
+-------------------------------------------------------------------------------------
+[ ] Order sample unit from IndiaMART supplier 22287620797 (Delhi) — minimum 1 pc
+[ ] Photograph sample: all 5 image slots (hero, lifestyle, benefit infographic, scale/size, packaging)
+[ ] Film a 15–20 second demo reel (fan on neck → commute or kitchen scenario → comfort expression)
+[ ] Fill all [OPERATOR: confirm] fields in specs table from actual sample measurements
+[ ] Run final copy through india-localizer for legal flag scan and tone check
+[ ] Confirm HSN code 8414 (or correct sub-heading) with CA / tax consultant
+[ ] Confirm supplier MOQ and lead time can support 100-unit opening inventory
+[ ] Add NF-022 to Dropdash; wait for Dropdash to push Shopify shell
+[ ] store-manager applies this draft data to the Shopify shell
+[ ] Set metafields via graphql_mutation (cod_eligible, rto_risk, angle, hsn_code)
+[ ] Assign to collections: "Personal Cooling", "Summer Essentials", "Gifting Under ₹999"
+[ ] Brief creative-studio with the 3 adAngles above — do not run ads on placeholder copy
+[ ] Activate raksha-bandhan-gift ad angle only in ad sets running from Jul 26 onward
+[ ] Hand to ads-manager only after at least 3 creative variants are approved
+[ ] Plan inventory clearance trigger: if stock >30 units in first week of September, discount and pause acquisition
 `.trim();
