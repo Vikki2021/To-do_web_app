@@ -94,4 +94,6 @@ Run these checks daily:
 - Anomaly in ads → `ads-manager`
 - Anomaly in store (CVR drop, broken page) → `store-manager`
 - Anomaly in support volume / sentiment → `customer-support`
+- Tracking-quality anomaly (Meta-vs-Shopify gap >40%, pixel event drop, EMQ degradation) → `pixel-doctor` for diagnosis before any scaling decision
+- Inventory-driven anomaly (top SKU revenue drop = stockout?) → `inventory-planner`
 - Need to schedule a recurring report → `ops-planner` (Coupler flow + Notion)

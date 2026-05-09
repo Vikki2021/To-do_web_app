@@ -40,21 +40,11 @@ Run on a schedule (operator can call "process orders" or kick from `daily-ops`):
 | `delivered` | NPS email at +2 days, review request at +7 days |
 | `cancelled_pre_ship` | Refund within 24h if prepaid |
 
-## Tracking email template
+## Templates
 
-> Subject: Your order #<num> is on the way 🚚
->
-> Hi <name>, your order with <product> shipped today.
-> Courier: <courier>  |  AWB: <awb>
-> Expected delivery: <eta>
-> Track: <tracking_url>
->
-> Reply to this email if you need anything.
-> — <brand>
+All transactional templates (tracking email, NDR follow-up, RTO recovery offer, refund, cancellation) live in the `whatsapp-templates` skill — Hinglish + English variants. Don't write from scratch unless the situation isn't covered.
 
-## NPS / review email (+2 days post-delivery)
-
-> Hi <name>, did <product> arrive in good shape? Reply 1-10 — and if it's a 9 or 10, we'd love a quick review here: <review_url>. ₹100 off your next order as thanks.
+The post-purchase NPS and review emails (+2d, +7d post-delivery) are owned by `email-marketer`, not by you. You handle the dispatch-side transactional stack only.
 
 ## Hard rules
 
@@ -70,3 +60,6 @@ Run on a schedule (operator can call "process orders" or kick from `daily-ops`):
 - Customer reply to a tracking email → `customer-support`
 - High RTO product → flag `product-research` to reconsider
 - Delivery delays from a specific courier → `marketing-analytics` to see if it's affecting CVR / repeat rate
+- SKU running low on stock → `inventory-planner` (stockout imminent → pause ad sets via `ads-manager` first)
+- Daily COD verification (orders >₹999) → `cod-verification-daily` playbook
+- Post-purchase NPS / review-request emails (+2d, +7d) → `email-marketer`

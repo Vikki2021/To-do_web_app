@@ -83,3 +83,6 @@ Common queries you should run on demand:
 - Need creatives → `creative-studio`
 - Product live, time to advertise → `ads-manager`
 - Need a landing page (advertorial) → coordinate with `ops-planner` for Vercel deploy
+- Inventory low / dead-stock on a SKU you maintain → `inventory-planner`
+- Dropdash drift detected (tags or product_type reverted) → re-apply per `inventory-planner`'s flag; long-term operator escalation
+- Pixel/CAPI issue surfaced via Shopify webPixels query → `pixel-doctor`
