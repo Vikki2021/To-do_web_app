@@ -72,6 +72,7 @@ swappable. **Do not hardcode numbers in agent prompts.** Reference the skill.
 - Pausing > 5 ads at once requires operator confirmation
 - Sending bulk customer email (>20 recipients) requires operator confirmation
 - Spend caps per ad set are stored in `docs/limits.md` — never exceed without approval
+- **Products are pushed into Shopify via the Dropdash app, not by `store-manager` directly**. `store-manager` enriches Dropdash-pushed shells (descriptions, metafields, tags, compare-at, SEO) — it does not call `create-product` to spawn new SKUs unless the operator explicitly says "create directly". See `store-manager.md` and `launch-product.md` for the two-step flow.
 
 ## Adding a new pillar
 
