@@ -28,6 +28,43 @@ Hard limits the agents must respect. Edit this file to change them — agents re
 | Compensation coupon issued without ticket | ₹0 | Always need a ticket reason |
 | Refund issued without operator | ≤ ₹500 | Above ₹500 needs approval |
 
+## Outbound email & WhatsApp (email-marketer)
+
+| Action | Cap | Beyond cap |
+|---|---|---|
+| Abandoned cart drafts in one run | ≤50 drafts | Operator review on send |
+| Marketing email send (manual approve) | ≤20 recipients auto-OK | >20 needs operator approval |
+| Festival broadcast (any size) | — | Always operator-approved |
+| Sample-then-full broadcast threshold | ≥100 recipients | Send 10% sample first, wait 30 min, check open/complaint rates |
+| WhatsApp Business proactive sends | Pre-approved templates only | Operator manages template approvals in Meta |
+| Win-back / lapsed-buyer sequence | ≤200 recipients/day | Above needs approval + warm-up plan |
+
+### Email blocked contacts (purge before sending)
+
+The customer list audit found bot-contaminated entries. These domains/patterns must be excluded from every send:
+- `*@grammarly.com`
+- `*@supermetrics.com`
+- `*@flipkart.com`
+- `*@codecademy.com`
+- `*@galaxy.ai`
+
+Add new patterns here as discovered. `email-marketer` reads this list before every send.
+
+## Inventory (inventory-planner)
+
+| Setting | Value |
+|---|---|
+| Numeric inventory normal range | 50-200 units per active SKU |
+| Festival peak ceiling | 500-1,000 units (Diwali only, T-21 onward) |
+| Display "Only X left" threshold | 1-10 units (must be real, not fake urgency) |
+| Display "In stock" + ETA threshold | 11-49 units |
+| Default sales-velocity window | 30-day rolling |
+| Festival-window safety stock | 14 days (vs 3-day default) |
+| Top-3-by-revenue safety stock | 7 days (vs 3-day default) |
+| Dead stock threshold | 0 sales 30d + >20 units |
+
+Stockout severity → action: see `.claude/skills/inventory-thresholds/SKILL.md`. Reorder formulas and festival multipliers live there.
+
 ## Fulfillment
 
 | Action | Cap |
@@ -71,3 +108,8 @@ The agents auto-execute below the cap and propose-then-wait above it. Don't chan
 | New campaign launch | none | always |
 | Mass product update | ≤10 products | >10 |
 | Refund per customer | ≤₹500 | >₹500 |
+| Inventory bulk adjust | ≤5 SKUs | >5 |
+| Archive a SKU (dead-stock retire) | none | always |
+| Festival broadcast | none | always |
+| Auto-cancel COD batch (cod-verification-daily) | ≤5 orders/run | >5 |
+| Pincode/phone blocklist add | 1 per run | >1 |

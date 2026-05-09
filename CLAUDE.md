@@ -14,7 +14,10 @@ and settings that let one operator run every pillar of the business through Clau
 | Paid ads | `ads-manager` | Meta Ads campaigns, scaling rules, kill rules, budgets |
 | Analytics | `marketing-analytics` | Supermetrics + Windsor cross-channel KPIs and anomaly alerts |
 | Customer support | `customer-support` | Gmail triage, order lookup, refund/COD/RTO handling |
+| Outbound email/WA | `email-marketer` | Abandoned cart, post-purchase, win-back, festival broadcasts |
 | Order fulfillment | `order-fulfillment` | Order status, tracking emails, NDR/RTO chase |
+| Inventory | `inventory-planner` | Reorder timing, festival stock, dead-stock, Dropdash drift |
+| Tracking health | `pixel-doctor` | Meta Pixel + CAPI diagnosis, dataset quality, attribution gaps |
 | Planning & SOPs | `ops-planner` | Notion SOP library, Calendar launches, weekly reviews |
 | India localization | `india-localizer` | Cross-cuts every pillar — COD, GST, regional copy, festivals |
 
@@ -38,6 +41,7 @@ and settings that let one operator run every pillar of the business through Clau
 Run the right playbook from `.claude/playbooks/`:
 
 - **Daily** → `daily-ops.md` — every morning, ~15 minutes of operator review
+- **COD verify** → `cod-verification-daily.md` — every morning, confirm COD orders before dispatch
 - **Weekly** → `weekly-review.md` — Friday close-out and next-week plan
 - **Launch a product** → `launch-product.md` — research → store → creative → ads → monitor
 - **Festival sale** → `festival-sale.md` — India festival calendar push (Diwali, Raksha Bandhan, etc.)
@@ -65,6 +69,8 @@ swappable. **Do not hardcode numbers in agent prompts.** Reference the skill.
 - `ad-scaling-rules` — concrete scale/maintain/kill rules
 - `creative-brief` — brief template every creative must satisfy
 - `indian-dropshipping` — India-specific playbook (COD, GST, RTO, regional)
+- `inventory-thresholds` — reorder points, festival multipliers, dead-stock rules
+- `whatsapp-templates` — Hinglish + English templates for every customer-facing intent
 
 ## Safety defaults
 
