@@ -16,14 +16,23 @@ End-to-end pipeline for launching a new SKU. Default cycle time: 5-7 days from a
 - Notion "Product Pipeline" entry → status: Sourced
 
 ## Stage 2 — Store build (Day 1-2, parallel with Stage 3)
-**Owner: store-manager**
+**Owner: operator (Dropdash push) → store-manager (enrichment)**
 
-- Create product with full description, SEO, tags, metafields
-- Build collection page if needed
-- Set inventory (realistic — not 0, not 999)
-- Create the launch discount code (`<SKU>10` or similar) with expiry
-- Set `cod_eligible`, `rto_risk`, `angle` metafields per `india-localizer` advice
-- Optional: deploy advertorial landing page on Vercel via `ops-planner`
+**Important — current source-of-truth policy:** Products are pushed into Shopify via the **Dropdash** app, not by `store-manager` directly. Two-step flow:
+
+1. **Operator adds the SKU to Dropdash** (operator-only action, outside the harness). Dropdash pushes a product shell into Shopify with vendor `Dropdash`, a placeholder description, and an auto-generated handle.
+2. **Then `store-manager` enriches the Dropdash-pushed shell**:
+   - Replace the placeholder description with the full structured copy (Hook → benefits → How it works → specs → Shipping & COD → Returns)
+   - Correct product type and tags (note: Dropdash may overwrite these on next sync; monitor `updatedAt` and re-apply if needed)
+   - Set `cod_eligible`, `rto_risk`, `angle` metafields per `india-localizer` advice
+   - Set compare-at price (typically 1.5× sell, rounded to 10s)
+   - Write SEO title (≤70 chars) and SEO description (≤155 chars)
+   - Set realistic inventory (not 0, not absurd)
+   - Build collection page if needed
+   - Create the launch discount code (`<SKU>10` or similar) with expiry
+   - Optional: deploy advertorial landing page on Vercel via `ops-planner`
+
+`store-manager` must NOT use `create-product` directly to spawn the SKU — that would orphan the product from Dropdash's supply chain. If the Dropdash shell is missing at this stage, stop and have the operator add it before continuing.
 
 ## Stage 3 — Creative production (Day 1-3, parallel with Stage 2)
 **Owner: creative-studio + india-localizer**
