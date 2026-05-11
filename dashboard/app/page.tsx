@@ -18,6 +18,7 @@ import { TopProducts } from '@/components/TopProducts';
 import { TopAds } from '@/components/TopAds';
 import { FestivalRail } from '@/components/FestivalRail';
 import { Pill } from '@/components/Pill';
+import { SourceErrorBanner } from '@/components/SourceErrorBanner';
 import { agents as runtime, playbooks } from '@/data/mock';
 import { getAllAgents } from '@/lib/harness';
 import { getDashboardData } from '@/lib/data';
@@ -40,7 +41,7 @@ const playbookPrompts: Record<string, string> = {
 
 export default async function HomePage() {
   const [data, agents] = await Promise.all([getDashboardData(), Promise.resolve(getAllAgents())]);
-  const { kpis, revenue7d, topProducts, topAds, festivals, activity, liveSources } = data;
+  const { kpis, revenue7d, topProducts, topAds, festivals, activity, liveSources, sourceErrors } = data;
   const now = new Date();
   const dateLine = new Intl.DateTimeFormat('en-IN', {
     weekday: 'long',
@@ -57,6 +58,8 @@ export default async function HomePage() {
 
   return (
     <div className="space-y-10">
+      <SourceErrorBanner errors={sourceErrors} />
+
       {/* Hero */}
       <section className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
         <div>
