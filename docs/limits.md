@@ -2,6 +2,19 @@
 
 Hard limits the agents must respect. Edit this file to change them — agents read it as source of truth.
 
+## ROAS targets
+
+| Metric | Value | Notes |
+|---|---|---|
+| **Break-even ROAS (default)** | **1.6×** | Covers product cost + courier + RTO provision (25%) + GST + ops for India COD-heavy stores. Per `winning-product-criteria` skill. |
+| Scaling band lower | BE × 1.5 (= 2.4×) | At or above → SCALE per `ad-scaling-rules` |
+| Scaling band upper | BE × 2.0 (= 3.2×) | At or above → SCALE FAST |
+| Maintain band | BE × 1.2 – 1.5 (= 1.92×–2.4×) | Hold steady |
+| Warning band | BE × 0.5 – 0.9 (= 0.8×–1.44×) | Day 2 warning → cut 30%; day 3 → pause |
+| Kill threshold | BE × 0.5 (= 0.8×) | Pause immediately if 3-day ROAS below |
+
+Operator override per SKU: set the break-even ROAS in the SKU's launch brief in Notion Product Pipeline if its margin profile diverges materially from the default (e.g., higher landed cost, lower margin product).
+
 ## Ad spend caps
 
 | Scope | Daily cap | Notes |
