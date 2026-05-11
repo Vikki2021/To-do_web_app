@@ -48,6 +48,11 @@ export type DashboardData = {
     meta: boolean;
     notion: boolean;
   };
+  sourceErrors: {
+    shopify: string | null;
+    meta: string | null;
+    notion: string | null;
+  };
 };
 
 export async function getDashboardData(): Promise<DashboardData> {
@@ -108,6 +113,23 @@ export async function getDashboardData(): Promise<DashboardData> {
   const festivalsOut = festivals && festivals.length > 0 ? festivals : mockFestivals;
   const activityOut = activity && activity.length > 0 ? activity : mockActivity;
 
+  // Detect configured-but-failing sources. A "configured" source whose fetch
+  // returned null almost certainly hit an auth/network error — surface it.
+  const sourceErrors = {
+    shopify:
+      sources.shopify && !shopifySummary
+        ? 'Configured but fetch returned no data. Likely auth failure (401) — verify SHOPIFY_ADMIN_TOKEN. Check Vercel runtime logs for the exact error.'
+        : null,
+    meta:
+      sources.meta && !metaKpi
+        ? 'Configured but fetch returned no data. Likely auth failure or insufficient scopes — verify META_ACCESS_TOKEN has ads_read + ads_management.'
+        : null,
+    notion:
+      sources.notion.festival && !festivals
+        ? 'Configured but fetch returned no data. Most likely the Dropshipping Ops page is not shared with the integration. Open the page → Connections → Add the integration.'
+        : null,
+  };
+
   return {
     kpis,
     revenue7d,
@@ -120,5 +142,6 @@ export async function getDashboardData(): Promise<DashboardData> {
       meta: sources.meta && Boolean(metaKpi),
       notion: sources.notion.festival && Boolean(festivals),
     },
+    sourceErrors,
   };
 }
