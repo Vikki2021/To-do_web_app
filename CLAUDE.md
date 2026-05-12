@@ -18,6 +18,7 @@ and settings that let one operator run every pillar of the business through Clau
 | Order fulfillment | `order-fulfillment` | Order status, tracking emails, NDR/RTO chase |
 | Inventory | `inventory-planner` | Reorder timing, festival stock, dead-stock, Dropdash drift |
 | Tracking health | `pixel-doctor` | Meta Pixel + CAPI diagnosis, dataset quality, attribution gaps |
+| Competitor intel | `competitor-spy` | Rival store UI / catalog / pricing / ads / apps dossiers — analysis only, never cloning |
 | Planning & SOPs | `ops-planner` | Notion SOP library, Calendar launches, weekly reviews |
 | India localization | `india-localizer` | Cross-cuts every pillar — COD, GST, regional copy, festivals |
 
