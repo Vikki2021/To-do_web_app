@@ -71,7 +71,7 @@ export default async function HomePage() {
             Namaste, operator. <span className="gradient-text">Aaj ka plan ready hai.</span>
           </h1>
           <p className="mt-2 max-w-2xl text-sm text-ink-dim">
-            9 agents · 4 skills · 6 playbooks. Every threshold lives in versioned skills, not in agent prompts.
+            13 agents · 6 skills · 7 playbooks. Every threshold lives in versioned skills, not in agent prompts.
             Run the <code className="font-mono text-saffron-300">daily-ops</code> playbook to clear today, or jump
             into a pillar below.
           </p>
