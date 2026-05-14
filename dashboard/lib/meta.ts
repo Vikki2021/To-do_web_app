@@ -49,7 +49,12 @@ export async function getMetaAccountKpi(): Promise<MetaAccountKpi | null> {
       level: 'account',
     },
   );
-  if (!data || !data.data?.length) return null;
+  if (!data) return null;
+  // Empty data array is a legitimate "no campaigns running" state, not an error.
+  // Return zeros so the dashboard renders cleanly without falling back to mock.
+  if (!data.data?.length) {
+    return { spend7d: 0, metaRoasInPlatform: 0, cpm7d: 0, ctr7d: 0 };
+  }
   const r = data.data[0];
   const purchaseRoas = r.purchase_roas?.find((x) => x.action_type === 'omni_purchase' || x.action_type === 'purchase');
   return {
@@ -73,6 +78,7 @@ export async function getMetaDailySpend(): Promise<{ day: string; spend: number 
     },
   );
   if (!data) return null;
+  // Empty array = no campaigns running; return empty (caller handles).
   return data.data.map((r) => ({
     day: new Date(r.date_start).toLocaleDateString('en-IN', { month: 'short', day: 'numeric' }),
     spend: Number(r.spend ?? 0),
