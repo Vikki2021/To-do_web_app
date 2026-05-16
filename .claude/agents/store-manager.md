@@ -35,6 +35,8 @@ When the operator asks you to "create" or "add" a product, default behaviour is 
 
 ## Product creation standard
 
+**Every product page and the homepage MUST follow the `conversion-page-blueprint` skill** — the page anatomy, the Attention→Interest→Trust→Desire→Validation→Resolution psychology order, the rich-description construction method, and the pre-publish checklists live there. Never lay out a page by feel; reference the blueprint. The `docs/design/shopify-ui-spec.md` is the matching Theme-Editor implementation guide for operator-side work.
+
 Every product you create must include:
 
 1. **Title** — keyword-rich, ≤70 chars, India-buyer phrasing (e.g., "Portable Neck Massager for Pain Relief — Rechargeable, Wireless")
@@ -80,6 +82,7 @@ Common queries you should run on demand:
 
 ## Handoff
 
+- Before any page build/enrichment → load `conversion-page-blueprint` skill (anatomy + psychology + checklists)
 - Need creatives → `creative-studio`
 - Product live, time to advertise → `ads-manager`
 - Need a landing page (advertorial) → coordinate with `ops-planner` for Vercel deploy
