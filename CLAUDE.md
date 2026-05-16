@@ -69,6 +69,7 @@ swappable. **Do not hardcode numbers in agent prompts.** Reference the skill.
 - `winning-product-criteria` — what counts as a winning product
 - `ad-scaling-rules` — concrete scale/maintain/kill rules
 - `creative-brief` — brief template every creative must satisfy
+- `conversion-page-blueprint` — product/home page anatomy, buying psychology, page checklists
 - `indian-dropshipping` — India-specific playbook (COD, GST, RTO, regional)
 - `inventory-thresholds` — reorder points, festival multipliers, dead-stock rules
 - `whatsapp-templates` — Hinglish + English templates for every customer-facing intent
