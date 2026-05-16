@@ -136,6 +136,85 @@ Seedance 2.0 generates a **different face every run** unless you anchor it. To k
 
 Before scripting, pull hooks from: Meta Ads Library (competitor brands — coordinate with `competitor-spy`), Instagram Reels (trending UGC hooks), TikTok Creative Center (top formats), YouTube Shorts (Indian D2C ads), Minea/AdSpy (paid intel). Or self-generate: "Generate 5 UGC ad angle ideas for [product] targeting Indian women 22-35", pick one, expand to a full structural script.
 
+## Image ad concept framework (static / feed image ads)
+
+When the task is **image ads** (not video), think like a senior Creative Strategist + Performance Marketing Strategist. **Conversion psychology, not aesthetics.** Every concept must have a clear marketing angle, a scroll-stopping visual hook, and direct-response intent. Pretty-but-vague loses to ugly-but-clear in performance.
+
+### Default behaviour
+
+Unless told otherwise, produce **5 distinct concepts**, each using a *different* core angle AND a *different* visual style (no two concepts should look or argue the same way — that's the whole point of a test batch). Output every concept in exactly this structure:
+
+```
+CONCEPT N — <one-line label>
+Product link:        <URL or [operator: confirm handle]>
+Image style & type:  <from the visual-style library below>
+Core angle:          <from the angle library below>
+Target emotion:      <the single dominant emotion this fires>
+Image description:   <what's literally in the frame — composition, subject,
+                      props, colour, where the eye lands first; specific
+                      enough for Higgsfield/Canva to generate>
+Headline text:       <on-image, ≤7 words, the scroll-stopper>
+Subtext:             <on-image support line, ≤12 words, the proof or offer>
+CTA button:          <"Shop Now" / "Order COD" / "Get 40% Off" / "Buy Now">
+Use case:            <which funnel stage + audience this is for, and why>
+```
+
+### Conversion-psychology angle library (pick a different one per concept)
+
+| Angle | What it exploits | Best for |
+|---|---|---|
+| Problem–agitation–solution | Pain made vivid, then relieved | Cold traffic, problem-aware buyers |
+| Before / after transformation | Visible change = instant proof | Demoable products |
+| Loss aversion | Cost of NOT having it | Seasonal / time-bound |
+| Social proof | Bandwagon — "everyone's buying" | Trust-deficit cold audiences (India) |
+| Authority / expert | Borrowed credibility (no fake claims) | Considered purchases |
+| Curiosity gap | Open loop the scroll must close | Top-of-funnel reach |
+| Price anchoring / value | Strike-through + "for the price of X" | Budget-conscious tier-2/3 |
+| Identity / "for people like you" | Self-recognition | Niche personas |
+| Convenience / time-saving | Effort removed | Busy homemakers, professionals |
+| Real urgency / seasonal | Genuine deadline (festival, summer) | Festival + monsoon windows |
+
+### Image-ad visual-style library (pick a different one per concept)
+
+- **Split before/after** — frame divided, problem left / solution right
+- **Bold colour-block hero** — product cut-out on saffron/teal block, giant offer text
+- **Native UGC photo** — looks like a real customer's phone photo, mild imperfection
+- **Comparison grid** — "Us vs ₹299 generic" tick/cross table baked into the image
+- **Testimonial card** — styled review/screenshot with ★★★★★ and a real-sounding quote
+- **Feature-callout infographic** — product centre, 4 benefit arrows with icons
+- **In-context lifestyle** — product used in a real Indian home/kitchen/commute
+- **Meme / native-feed text** — relatable joke framing, looks organic not advertised
+- **Offer-stack** — product + "What you get" bullets + price + COD badge
+- **Pattern-interrupt close-up** — extreme macro / unexpected angle that stops the thumb
+
+### India performance specifics (apply to every image concept)
+
+- **Mobile-first ratios**: 4:5 (feed) and 1:1 primary; 9:16 for Story placements. Never design for desktop-width.
+- **Text legible at thumbnail size** — headline must read on a 380px screen at 30% scroll speed.
+- **Price in ₹ with strike-through** where the angle is value/anchoring; include the COD badge on offer-led concepts.
+- **Hinglish on-image text is allowed and often outperforms** for tier-2/3 — validate with `india-localizer`.
+- **No fake** scarcity counters, fake reviews, fake "as seen on". Real social proof only (pull counts from Judge.me when available).
+- **No medical/health claims** baked into headline or subtext.
+
+### Production path
+
+1. Generate the 5 concepts in the structure above (this is the brief).
+2. For each, produce the actual asset: **Higgsfield `generate_image`** for photographic/lifestyle/UGC styles; **Canva `generate-design`** for text-heavy styles (comparison grid, offer-stack, infographic, testimonial card) because Canva handles precise typography better than diffusion.
+3. Brand-check (Canva `list-brand-kits`) + compliance-check.
+4. Deliver to `ads-manager` with the concept labels intact so ad-set naming maps to angle (e.g., `AC-Cooler_BeforeAfter_A1`).
+
+### Worked example — Air Cooler (live, enriched, peak summer)
+
+5 concepts for the Portable Mini Air Cooler (₹1,499, compare-at ₹2,250):
+
+1. **"AC ka bill nahi, cooler la"** — Style: Bold colour-block hero. Angle: Price anchoring/value. Emotion: relief. Image: cooler on saffron block, melting-heat shimmer behind, giant `₹1,499` with `₹2,250` struck through, COD badge. Headline: "AC ka kharcha? Bilkul nahi." Subtext: "Personal cooling, ₹1,499 only — COD available." CTA: Order COD. Use case: cold traffic, budget tier-2/3.
+2. **"Desk pe Antarctica"** — Style: In-context lifestyle. Angle: Convenience. Emotion: comfort/aspiration. Image: woman at home desk in Indian summer, cooler beside laptop, visible mist. Headline: "Apni desk, apna mausam." Subtext: "USB-powered. Mist + fan + cool air in one." CTA: Shop Now. Use case: WFH/student audience.
+3. **"Power cut? Cool rehna."** — Style: Split before/after. Angle: Problem-agitation-solution. Emotion: frustration→resolution. Image: left = sweating in a power cut, right = calm with cooler on power bank. Headline: "Bijli gayi, garmi nahi aayi." Subtext: "Runs on power bank. Tier-2 summer survival kit." CTA: Buy Now. Use case: North-India power-cut belt.
+4. **"3-in-1"** — Style: Feature-callout infographic. Angle: Value/feature density. Emotion: smart-shopper pride. Image: cooler centre, 3 arrows: Cooler / Humidifier / Fan. Headline: "Teen kaam, ek gadget." Subtext: "Cooler + humidifier + fan. ₹1,499." CTA: Get 40% Off. Use case: comparison shoppers.
+5. **"Maa ke liye"** — Style: Native UGC photo. Angle: Identity/gifting. Emotion: warmth. Image: phone-shot of cooler gifted to mother in a tier-2 kitchen, genuine smile. Headline: "Garmi mein Maa ko ye do." Subtext: "Quiet, safe, ₹1,499 — gift that gets used daily." CTA: Order COD. Use case: gifting angle, festival/Mother's-Day-adjacent.
+
+(Replace product link with the live Air Cooler handle before sending to ads-manager.)
+
 ## Hard rules
 
 - **Never** generate creative without a brief that satisfies the `creative-brief` skill.
@@ -143,6 +222,9 @@ Before scripting, pull hooks from: Meta Ads Library (competitor brands — coord
 - **Never** use stock-photo-looking images for UGC ads — they tank CTR.
 - **Never** scale a UGC video that used Freestyle mode — only Structural-mode generations are reproducible enough to scale.
 - **Never** generate a multi-clip ad without a fixed character reference image — face drift across clips destroys believability.
+- **Never** ship an image ad concept without a clear single angle + direct-response CTA — "pretty but vague" is a fail. Every concept must answer "what do I do and why now".
+- **Always** produce image-ad batches as 5 distinct concepts spanning different angles AND visual styles (a test batch is worthless if every variant argues the same way).
+- **Always** keep on-image headline ≤7 words, subtext ≤12 words, legible at 380px thumbnail.
 - **Always** keep Hinglish dialogue ≤10 words/line and the setting Indian.
 - If Higgsfield balance is low (`balance` tool returns < threshold), warn the operator before bulk generation. Use 720p for all test renders to conserve credits.
 
