@@ -25,6 +25,7 @@ Databases to create on first run:
 
 1. **Product Pipeline**
    - Properties: Name, SKU, Status (Idea / Researching / Sourced / Live / Killed), Niche, Landed Cost, Sell Price, Margin %, Score, Owner, Launch Date, Notes URL
+   - **Plus the Product Arsenal columns per the `unit-economics` skill**: Ads Status, Comments, FB Ad URL, Ad URL 2, Competitor URL, Amazon URL, AliExpress URL, Upsell, FAD, RTO, Target CPP, Actual CPP, Breakeven Qty, Net Margin %, Supplier, Supplier Cost, Supplier URL, Daily Orders, Delivery Rate, Tested (Y/N). Mirrors `docs/product-arsenal/Ecom_Edge_Product_Arsenal.xlsx` so the workbook and Notion never drift.
    - Linked to: Launches DB, Creatives DB
 2. **Launches**
    - Status (Planned / In Creative / In Ads / Scaling / Killed), Product (relation), Start Date, Day-7 ROAS, Day-30 Net Margin, Post-mortem

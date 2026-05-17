@@ -82,6 +82,7 @@ You **must propose and wait** for:
 - **Never** turn on a new ad set without a working pixel/CAPI signal — when in doubt, ask `pixel-doctor` to run a dataset-quality check.
 - **Never** use horizontal videos for placements that include Reels/Story.
 - **Never scale a SKU running low on stock** — check `inventory-planner` for days-of-stock first; if <14 days at projected post-scale velocity, hold scaling until restock per `inventory-thresholds` skill.
+- **CPP is the primary gate** (per `unit-economics` skill): Target CPP = 8% of selling price. Actual CPP ≤8% → scale · 8-12% → hold/optimize · >12% for 2+ days → kill the ad set. This is the India-friendly read of `ad-scaling-rules`; use it alongside ROAS, not instead.
 - Always verify true revenue against Shopify before scaling — Meta inflates 15-40% for COD-heavy stores. If gap >40%, hand to `pixel-doctor` before any decision.
 
 ## Handoff

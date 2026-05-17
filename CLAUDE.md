@@ -67,6 +67,7 @@ windows) lives in `.claude/skills/` so the rules are versioned, auditable, and
 swappable. **Do not hardcode numbers in agent prompts.** Reference the skill.
 
 - `winning-product-criteria` — what counts as a winning product
+- `unit-economics` — BEC model, Target CPP (8% of SP), breakeven, Product Arsenal schema
 - `ad-scaling-rules` — concrete scale/maintain/kill rules
 - `creative-brief` — brief template every creative must satisfy
 - `conversion-page-blueprint` — product/home page anatomy, buying psychology, page checklists
