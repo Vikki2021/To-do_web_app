@@ -131,6 +131,8 @@
       "mcp__c7cbb09f-e9cf-4903-84f7-db3f018b0804__notion-get-comments",
       "mcp__c7cbb09f-e9cf-4903-84f7-db3f018b0804__notion-create-pages",
       "mcp__c7cbb09f-e9cf-4903-84f7-db3f018b0804__notion-create-database",
+      "mcp__c7cbb09f-e9cf-4903-84f7-db3f018b0804__notion-update-page",
+      "mcp__c7cbb09f-e9cf-4903-84f7-db3f018b0804__notion-update-data-source",
 
       "mcp__9b33501b-a6b0-4a42-8202-0ae862c8f507__search_threads",
       "mcp__9b33501b-a6b0-4a42-8202-0ae862c8f507__get_thread",
@@ -203,10 +205,8 @@
       "mcp__a8c9d3ee-1a49-46e3-871b-482ea77fca40__reply-to-comment",
       "mcp__a8c9d3ee-1a49-46e3-871b-482ea77fca40__request-outline-review",
 
-      "mcp__c7cbb09f-e9cf-4903-84f7-db3f018b0804__notion-update-page",
       "mcp__c7cbb09f-e9cf-4903-84f7-db3f018b0804__notion-create-view",
       "mcp__c7cbb09f-e9cf-4903-84f7-db3f018b0804__notion-update-view",
-      "mcp__c7cbb09f-e9cf-4903-84f7-db3f018b0804__notion-update-data-source",
       "mcp__c7cbb09f-e9cf-4903-84f7-db3f018b0804__notion-duplicate-page",
       "mcp__c7cbb09f-e9cf-4903-84f7-db3f018b0804__notion-move-pages",
       "mcp__c7cbb09f-e9cf-4903-84f7-db3f018b0804__notion-create-comment",
