@@ -16,6 +16,23 @@ Every other agent and skill defers here when the buyer is Indian.
 - **Trust is the bottleneck.** Indian buyers fear being scammed more than missing out.
 - **Hinglish converts.** Pure English alienates tier-2/3, pure Hindi alienates metros.
 - **Price-point matters more than discount %.** ₹999 with no discount > ₹1,999 with 50% off.
+- **Women are the dominant D2C buyer.** ~70%+ of impulse purchase decisions in our category mix (kitchen, beauty, home, kids, decor, fashion, jewelry, wellness) are female-driven. This is the single highest-converting demographic on Meta India and is encoded as KPI #13 in `winning-product-criteria` — a product that misses the female-buyer fit needs exceptional margin (≥4×) to be worth launching.
+
+### Female-buyer-fit categories (KPI #13 = YES)
+
+Default to these for fastest scaling:
+- **Kitchen & cooking** — gadgets, choppers, organizers, food storage
+- **Home decor & cleaning** — lights, organizers, cleaning tools, ambient
+- **Beauty & personal care** — skincare tools, hair, grooming (women + babies)
+- **Kids & baby** — toys, learning, feeding, safety
+- **Fashion accessories** — jewelry, bags, scarves, hair accessories
+- **Wellness (non-medical)** — posture, foot massage, sleep aids, ergonomic
+
+### Male-skew categories (KPI #13 typically NO)
+
+Launch only with stronger margin + sharper hook:
+- Tools, hardware, automotive, electronics-heavy, fitness equipment, gaming
+- Men's grooming is a special case — works but smaller pool, higher CAC
 
 ## 2. Pricing tiers (memorize)
 

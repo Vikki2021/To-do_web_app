@@ -22,12 +22,14 @@ For India-specific signals (COD viability, RTO risk, festival fit, language), co
 ## Process
 
 1. **Frame the hypothesis** — who buys this, what problem it solves, why now.
-2. **Pull demand signals** in parallel:
+2. **Pre-screen against the 13-KPI checklist** (`winning-product-criteria` §0). Need **≥7/13** to continue. Report YES/NO per KPI plus the hit-count. If pre-screen <7, STOP — log KILL with the failed KPIs and return. Do not pull demand signals or depth-score a product that fails this gate.
+3. **Pull demand signals** in parallel (only if pre-screen passes):
    - Supermetrics: TikTok / YouTube / Google Trends / Meta Ads Library equivalents
    - Meta Ads: industry benchmarks + auction ranking benchmarks for the vertical
    - Shopify (own store): search related products, check past performance via `run-analytics-query`
    - WebSearch / WebFetch: AliExpress, IndiaMART, Meesho listings for landed cost; Amazon.in for saturation
-3. **Score** each candidate against `winning-product-criteria` (1-5 each):
+   - **Capture the competitor Meta Ad Library URL** that satisfied pre-screen KPI #4 → goes into `arsenal.fb_ad_url` per the `unit-economics` Product Arsenal schema
+4. **Depth-score** each candidate against `winning-product-criteria` §1 (1-5 each axis):
    - Margin (target ≥3x landed cost incl. ads)
    - Problem-solving / wow factor
    - Broad appeal (not hyper-niche)
@@ -35,26 +37,31 @@ For India-specific signals (COD viability, RTO risk, festival fit, language), co
    - Light + small (shipping + RTO friendly)
    - Not in big-box stores (Amazon/Flipkart top results poison conversion)
    - India COD-viable (price < ₹1,499 sweet spot, low RTO category)
-4. **Output** a launch brief, not a list of links. Brief format:
+5. **Output** a launch brief, not a list of links. Brief format:
 
 ```
 PRODUCT: <name>
+PRE-SCREEN: <n>/13   (NOs: <list>)
 HOOK: <one-line problem-promise>
 LANDED COST: ₹<x> (supplier: <name/link>)
 SELL PRICE: ₹<y>  |  MARGIN: ₹<z> (<%>)
 TARGET ROAS: <n.n>x  (break-even ROAS: <m.m>x)
+TARGET CPP: ₹<= 8% of SP>
 AUDIENCE: <persona, age, geo, language>
+COMPETITOR AD: <Meta Ad Library URL — proof of concept>
 ANGLE 1: <hook variant>
 ANGLE 2: <hook variant>
 ANGLE 3: <hook variant>
 RISK: <top 1-2 risks: RTO, seasonality, IP, saturation>
-SCORE: <total/35>  →  GO / HOLD / KILL
+DEPTH SCORE: <total/35>  →  GO / HOLD / KILL
 NEXT STEP: hand to creative-studio with brief, or ops-planner if scheduling
 ```
 
 ## Hard rules
 
-- If GO score is below 24/35, output **HOLD** and explain what's missing.
+- **Pre-screen first, always.** A product with pre-screen <7/13 is KILLED on the spot — no depth-scoring, no brief.
+- A NO on KPIs #1, #2, or #3 (size / ship / margin) is a structural fail — soft kill even if total hits ≥7, unless margin is exceptional (≥4×).
+- If depth GO score is below 24/35 (even with pre-screen passing), output **HOLD** and explain what's missing.
 - Never recommend a product priced above ₹2,499 for a cold COD audience without flagging the elevated RTO risk.
 - Never recommend trademarked / branded / health-claim products (massagers OK, "cures diabetes" not OK).
 - Always check Amazon.in top 3 results — if they're under ₹500 with Prime, mark saturation risk.
