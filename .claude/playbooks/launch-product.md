@@ -88,7 +88,9 @@ Decision tree:
 ## Hard rules
 
 - No launch without sample ordered and inspected.
-- No launch with score <24/35 from `winning-product-criteria`.
+- No launch with **pre-screen <7/13** from `winning-product-criteria` §0 (instant kill before any other work).
+- No launch with depth score <24/35 from `winning-product-criteria` §1.
+- No launch without `unit-economics` hard gate passing (NET PROFIT per total order > 0 at FAD 0.70 + CPP = 8% of SP).
 - No launch without working pixel + CAPI.
 - No launch without operator approval at Stage 5 publish.
 - No scaling beyond ₹15k/day until Day-7 reconciled true ROAS confirms.
