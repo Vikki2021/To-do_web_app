@@ -9,6 +9,79 @@ All thresholds are tuned for Indian dropshipping with the COD-RTO reality baked 
 Replace `BE_ROAS` with the product's break-even ROAS from the launch brief.
 Default `BE_ROAS = 1.6` (covers product cost + courier + RTO provision + GST + ops).
 
+**Primary gate metric is CPP, not ROAS** — for India COD, CPP is the cleaner, faster signal (ROAS is corrupted by RTO until reconciled). Use ROAS as the reconciliation check after the fact.
+
+---
+
+## Operator SOP — India COD daily testing protocol
+
+This is the operator's tested, current testing recipe. Use it as the default for every new product launch unless the product brief specifies otherwise.
+
+### Campaign structure (per product)
+
+- **One Sales campaign per product** — never bundle SKUs into one campaign
+- **ABO at the ad-set level** (NOT CBO during testing). Set `₹200/day per ad set`.
+- **Single-interest per ad set** — one targeting interest per ad set, broad placements
+- **Advantage+ Audience suggestions OFF** during testing (you want to read interests cleanly)
+- **Advantage+ Placements ON**
+- **Optimization event**: Purchase
+- **Naming convention** (enforced):
+  - Campaign name: `<Product> – <Price>` (e.g., `Neck Fan – 999`)
+  - Ad set name: `<Interest Name>` (e.g., `Summer Cooling`)
+  - Ad name: `<Video number>` (e.g., `1`, `2`, `3`)
+
+### Day-1 launch (the night before, scheduled for 4 AM IST)
+
+- **5 ad sets**, each with a unique single interest, each at ₹200/day
+- Total Day-1 spend cap: **₹1,000**
+- Scheduled start: **4:00 AM IST** (lowest-CPM window for India)
+
+### Day-2 expansion (scheduled 4 AM IST)
+
+- Keep performing Day-1 ad sets running (per CPP gate below)
+- Add **5 NEW ad sets** with different interests, same ₹200/day each
+- Total Day-2 spend cap: **₹2,000** (the original 5 + new 5)
+
+### Day-1 / Day-2 evening review — CPP gate
+
+Compute Target CPP from `unit-economics` skill: **Target CPP = 8% of SP**.
+Apply a **₹10 absolute buffer** on the Target CPP before killing (e.g., SP ₹999 → Target CPP ₹80 → kill threshold ₹90).
+
+| Condition | Action |
+|---|---|
+| Ad set CPP ≤ Target CPP (with ₹10 buffer) | **Scale** (proceed to scaling phase) |
+| Ad set has spent 1× Target CPP, still over the buffer, no purchase | **Kill** the ad set |
+| Ad set CPP over buffer **but front-end is strong** (CTR ≥ 1% AND CPC < ₹7-₹10) | **Hold 1 more day** — give learning a chance |
+| Poor front-end (CTR < 1% OR CPC > ₹10) | **Kill** the ad set |
+
+### Front-end metric gates
+
+| Stage | CPC target | CTR target | Notes |
+|---|---|---|---|
+| Testing | < ₹7.5 | ≥ 1.0% | Hard floors — below these, ad creative is the problem, not the audience |
+| Scaling | < ₹5.0 | ≥ 1.0% | Scaling pulls CPC down naturally; if it doesn't, you scaled too fast |
+
+CPP is the most important metric of all — front-end gates are secondary signals to decide *whether* to hold or kill when CPP is borderline.
+
+### Day-3+ scaling
+
+Move to the scaling rules below. Scale changes happen at **12:00 AM IST** (Meta processes overnight, learning stabilizes by morning).
+
+### Reference CPP by price point
+
+Derived from Target CPP = 8% of SP:
+
+| Selling price | Target CPP | Kill threshold (with ₹10 buffer) |
+|---|---|---|
+| ₹699 | ₹56 | ₹66 |
+| ₹999 | ₹80 | ₹90 |
+| ₹1,199 | ₹96 | ₹106 |
+| ₹1,499 | ₹120 | ₹130 |
+| ₹1,999 | ₹160 | ₹170 |
+| ₹2,499 | ₹200 | ₹210 |
+
+---
+
 ## Phase 0 — Learning phase (first 50 events / 3-5 days)
 
 - **Do not edit** budget, audience, placement, or bid during the learning phase. Edits restart learning and waste spend.
@@ -32,11 +105,27 @@ Use 7-day ROAS to break ties when 3-day is volatile.
 
 ## Phase 2 — Scaling cadence (winning ad sets)
 
-- Max **+20% budget per day**, never more (Meta's algorithm punishes bigger jumps with CPM spikes).
-- After 4 consecutive days of +20%, hold one day (let learning re-stabilize) then continue.
-- When budget hits ₹15,000/day, switch from ad-set-level scaling to duplicating into a **scaling campaign** with CBO and budget ₹30,000/day.
-- For continued scaling beyond ₹50,000/day on a single product, move to **Advantage+ Shopping Campaign** with the catalog.
-- Never scale more than 3 ad sets per product simultaneously — auction overlap kills CPM.
+Apply once an ad set passes the CPP gate (≤ Target CPP + ₹10 buffer) on at least 1 day with at least 1 purchase.
+
+### Vertical scaling (preferred for incremental scale)
+
+- **+20% budget per day**, max — never more (Meta's algorithm punishes bigger jumps with CPM spikes)
+- Budget changes scheduled at **12:00 AM IST** so learning stabilizes by morning
+- After 4 consecutive days of +20%, hold one day (let learning re-stabilize) then continue
+- Only vertical-scale ad sets that are *at or under* Target CPP (with the ₹10 buffer)
+
+### Horizontal scaling (preferred when one winner is found)
+
+- Duplicate the winning ad set **3 times** (same interest, same creatives) inside the same campaign
+- Set the duplicate budgets to **2× the original** (i.e., ₹400 each if the winner was at ₹200)
+- This effectively gives the winner 7× exposure (1× original + 3× duplicates @ 2× budget = 6 + 1 = 7× spend) with controlled auction overlap
+- Cull duplicates that drift over Target CPP within 48 hours — keep the survivors
+
+### Higher-level scaling steps
+
+- When total budget on a single product hits ₹15,000/day, switch from ABO to duplicating into a **scaling campaign** with CBO and budget ₹30,000/day
+- For continued scaling beyond ₹50,000/day on a single product, move to **Advantage+ Shopping Campaign** with the catalog
+- Never run more than 3 scaling ad sets per product simultaneously beyond the duplication batch — auction overlap kills CPM
 
 ## Phase 3 — Creative fatigue triggers
 
@@ -89,11 +178,25 @@ True ROAS = `Shopify net revenue × (1 - RTO%) ÷ ad spend`
 - Always reconcile against Shopify before any scale/kill decision
 - If gap >40% between Meta and Shopify revenue, your pixel/CAPI is broken — fix that before changing budgets
 
+## Pre-launch campaign checklist
+
+Before clicking Publish on any campaign, `ads-manager` confirms ALL of:
+
+- [ ] Budget set correctly (₹200/ad set ABO for testing; otherwise per scaling rules)
+- [ ] Link redirect verified — both the website URL and the description URL go to the live product page (not a 404, not a draft)
+- [ ] Location exclusions applied — `cod_blocked_pincodes` from `docs/limits.md` are excluded
+- [ ] Automated rules applied (kill if CPP > buffer, cut if CTR < threshold, etc.)
+- [ ] Thumbnail set on every ad (no default placeholder thumbnails)
+- [ ] Ad set start time = 4:00 AM IST (for testing) or 12:00 AM IST (for scaling)
+- [ ] Naming convention enforced (Campaign: `<Product> – <Price>`, Ad set: interest, Ad: video number)
+- [ ] Pixel + CAPI healthy (dataset quality "good" or better)
+
 ## Auto-execute boundary (for ads-manager)
 
 `ads-manager` may execute without asking only inside this band:
-- Pause ad sets matching learning-phase or kill-rule conditions exactly
-- +20% budget on ad sets in SCALE row, max once per day
+- Pause ad sets matching learning-phase or kill-rule conditions exactly (CPP > Target+₹10 after 1× CPP spent, or front-end fail)
+- +20% budget on ad sets in SCALE row, max once per day, scheduled for 12:00 AM IST
+- Duplicate a winner up to 3× per the horizontal-scaling rule (each duplicate at 2× original budget)
 - Pause individual ads with CTR < 0.5% after 2,000 impressions
 
-Anything else (>20% changes, new campaigns, mass pauses, retargeting build-out) → propose to operator first.
+Anything else (>20% changes, new campaigns, mass pauses, retargeting build-out, switching from ABO to CBO scaling campaign) → propose to operator first.

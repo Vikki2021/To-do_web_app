@@ -124,12 +124,17 @@ Always use a courier with COD remittance ≤ T+7 days. Cash flow dies otherwise.
 
 ## 9. Meta Ads tactics specific to India
 
+- **Operator schedule windows** (operator's tested SOP):
+  - **4:00 AM IST** — schedule new test ad sets to start. India auction is cheapest here.
+  - **12:00 AM IST** — schedule budget changes for scaling. Learning re-stabilizes by morning.
+  - Never launch tests live during the Indian working day — auction is more expensive and learning is noisier.
 - **Lowest CPM windows**: 11pm–2am IST and 7am–9am IST (commute scrolling). Schedule heavier delivery there.
 - **Avoid**: Tuesday early-morning spike days where political news dominates feed
 - **Placements**: Reels and Story drive best CPM-to-ROAS in tier-2/3; Feed dominates metros
 - **Languages targeting**: do not over-restrict; let Advantage+ Audience figure out language affinity
 - **Lookalikes**: 1% LAL of last-90d-purchasers > interests for cold scaling once you have 1000+ purchases
 - **Catalog/Advantage+ Shopping** kicks in beautifully once 10+ SKUs have ≥50 purchases each
+- **Testing structure** (per `ad-scaling-rules` Operator SOP): ABO single-interest at ₹200/ad set, 5 ad sets Day 1 + 5 more Day 2. CPP-led decisions, not ROAS.
 
 ## 10. GST and legal
 

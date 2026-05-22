@@ -26,47 +26,66 @@ Cross-platform truth (validate Meta numbers vs):
 
 ## Default campaign structure
 
-For a new product launch:
+Operator's tested SOP is encoded in the `ad-scaling-rules` "Operator SOP — India COD daily testing protocol" section. Read it before every launch. Summary:
 
-1. **Testing campaign** — CBO, ₹2,000–₹3,000/day, 3-5 ad sets, each ad set 3-6 ads (UGC + studio + meme angle).
+1. **Testing — one Sales campaign per product, ABO at the ad-set level** (NOT CBO during testing).
+   - **Day 1**: 5 ad sets, single-interest each, ₹200/day per ad set (Day-1 cap ₹1,000)
+   - **Day 2**: keep performers from Day 1 + 5 NEW ad sets, ₹200/day each (Day-2 cap ₹2,000)
+   - All ad sets scheduled to start at **4:00 AM IST**
    - Objective: Sales (Conversions), optimize for Purchase
-   - Audience: broad India 18-55 with 1-2 interest stacks; let Advantage+ Audience do its thing
-   - Placement: Advantage+ Placements
-   - Bid: lowest cost, no cap day 1
-2. **Scaling campaign** — once an ad set hits scale criteria (see `ad-scaling-rules`), move winners into a separate CBO with higher budget.
-3. **Retargeting campaign** — once we have 1,000+ pixel events: ATC30, VV75-30d, Engaged-90d. Frequency cap 1.5/week.
-4. **Advantage+ Shopping (ASC)** — once catalog has ≥10 products with consistent sales.
+   - Advantage+ Placements ON · Advantage+ Audience suggestions OFF (read interests cleanly during testing)
+   - **Naming convention**: Campaign `<Product> – <Price>` · Ad set `<Interest>` · Ad `<video number 1, 2, 3…>`
+2. **Daily decision driven by CPP first** — Target CPP = 8% of SP (from `unit-economics`), kill threshold = Target + ₹10 buffer. Hold-vs-kill decided on front-end gates (CTR ≥ 1%, CPC < ₹7.5). Full matrix in `ad-scaling-rules`.
+3. **Scaling — Day 3+ once a winner emerges**:
+   - Vertical: +20%/day, budget changes scheduled at **12:00 AM IST**
+   - Horizontal: duplicate the winning ad set 3× at 2× original budget each
+   - Front-end gates at scale: CPC < ₹5 · CTR ≥ 1%
+4. **Retargeting** — once we have 1,000+ pixel events: ATC30, VV75-30d, Engaged-90d. Frequency cap 1.5/week.
+5. **Advantage+ Shopping (ASC)** — once catalog has ≥10 products with consistent sales and a single product crosses ₹50k/day.
 
-## Ad creation checklist
+## Campaign launch checklist (pre-publish)
 
-Before clicking publish on every ad, verify:
+Before clicking publish on any campaign, verify (the operator's SOP):
+- [ ] **Budget**: ₹200/day per ad set for testing; per scaling rule otherwise
+- [ ] **Link redirect**: website URL and the description URL both go to the live product page (not a 404, not a draft)
+- [ ] **Location exclusions**: `cod_blocked_pincodes` from `docs/limits.md` applied
+- [ ] **Automated rules**: kill-on-CPP-over-buffer and cut-on-low-CTR rules attached
+- [ ] **Thumbnail**: set on every ad (no default placeholder thumbnails)
+- [ ] **Ad set start time**: 4:00 AM IST for tests · 12:00 AM IST for scaling changes
+- [ ] **Naming convention** enforced
 - [ ] Pixel is firing (`ads_get_dataset_quality` returns OK)
-- [ ] Conversion event matches funnel stage (Purchase, not AddToCart, for sales campaigns)
-- [ ] Creative passes brand-check (handed off from `creative-studio`)
+- [ ] Conversion event = Purchase (not AddToCart)
+- [ ] Creative passes brand-check from `creative-studio`
 - [ ] Primary text has 3 hooks A/B-tested per ad
-- [ ] Headline localized (handed through `india-localizer`)
+- [ ] Headline localized through `india-localizer`
 - [ ] CTA matches funnel: "Shop Now" for direct, "Learn More" for advertorial
 - [ ] UTM params on landing page URL: `utm_source=fb&utm_medium=paid&utm_campaign={{campaign.name}}&utm_content={{ad.name}}`
 - [ ] COD/Prepaid offer in primary text if margin allows
 
 ## Daily ads routine (called from `daily-ops` playbook)
 
+Daily rhythm follows the operator's two scheduling windows:
+- **4:00 AM IST** — new test ad sets go live (scheduled the night before)
+- **12:00 AM IST** — scale-up budget changes go live (so learning stabilizes overnight)
+
 1. Pull yesterday + 3-day + 7-day insights for every active ad set.
-2. Compare against `ad-scaling-rules` thresholds. Output a table:
+2. Compare against `ad-scaling-rules` thresholds. **Lead the table with CPP**; ROAS is the reconciliation check. Output:
    ```
-   AD SET | SPEND | ROAS_3d | ROAS_7d | CPM | CTR | DECISION
+   AD SET | SPEND | CPP | TARGET_CPP | CPC | CTR | ROAS_3d | DECISION
    ```
 3. **Auto-execute** decisions only inside safe ranges (see safety section). Otherwise propose and wait for operator approval.
 4. Detect creative fatigue: frequency >2.5 + CTR drop >25% vs 7-day baseline → flag for `creative-studio` refresh.
 5. Use `ads_insights_anomaly_signal` to catch sudden CPM spikes / drops.
 6. Use `ads_get_opportunity_score` weekly and apply low-risk recommendations.
+7. Schedule next-day tests (4:00 AM IST start) before EOD — never launch tests live during the day on Indian time, the auction is more expensive.
 
 ## Decision authority (safety)
 
 You may **auto-execute without asking**:
-- Pause an ad set spending <₹500/day with 0 purchases after spending 2× target CPA
-- Increase a winning ad set's budget by ≤20% (within `ad-scaling-rules`)
-- Duplicate a winning ad set into the scaling campaign
+- Pause an ad set that has spent **1× Target CPP** with actual CPP above Target+₹10 buffer and 0 purchases (operator's tested kill rule)
+- Pause an ad set with CTR < 1% AND CPC > ₹10 — front-end fail
+- Increase a winning ad set's budget by ≤20% (within `ad-scaling-rules`), scheduled for 12:00 AM IST
+- Horizontally scale a winner: duplicate up to 3× at 2× original budget each (per `ad-scaling-rules` Phase 2)
 - Turn off a single ad with CTR <0.5% after 2,000 impressions
 
 You **must propose and wait** for:
@@ -82,7 +101,7 @@ You **must propose and wait** for:
 - **Never** turn on a new ad set without a working pixel/CAPI signal — when in doubt, ask `pixel-doctor` to run a dataset-quality check.
 - **Never** use horizontal videos for placements that include Reels/Story.
 - **Never scale a SKU running low on stock** — check `inventory-planner` for days-of-stock first; if <14 days at projected post-scale velocity, hold scaling until restock per `inventory-thresholds` skill.
-- **CPP is the primary gate** (per `unit-economics` skill): Target CPP = 8% of selling price. Actual CPP ≤8% → scale · 8-12% → hold/optimize · >12% for 2+ days → kill the ad set. This is the India-friendly read of `ad-scaling-rules`; use it alongside ROAS, not instead.
+- **CPP is the primary gate** (per `unit-economics` skill): Target CPP = 8% of selling price; kill threshold = Target + ₹10 absolute buffer. Cut on day 1 if the ad set has spent ≥1× Target CPP and CPP is above the buffer with no purchase. ROAS is the reconciliation check after the fact, not the primary gate (it's corrupted by RTO in COD-heavy India).
 - Always verify true revenue against Shopify before scaling — Meta inflates 15-40% for COD-heavy stores. If gap >40%, hand to `pixel-doctor` before any decision.
 
 ## Handoff
