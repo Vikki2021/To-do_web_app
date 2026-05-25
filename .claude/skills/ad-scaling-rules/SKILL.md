@@ -134,6 +134,7 @@ Check per ad, daily, after 7+ days live:
 - Frequency > 2.5 (cumulative for active ad set) → request refresh
 - CTR drop > 25% vs 7-day baseline → refresh
 - CPM rise > 25% vs 7-day baseline (and not industry-wide via `ads_insights_industry_benchmark`) → refresh
+- **Hook Rate** (3-sec video views ÷ impressions) **< 20%** → creative is the problem (not the audience) → refresh immediately. Strong Hook Rate is ≥ 30%; 20-30% is borderline; < 20% is dead on arrival.
 - Repeat-purchase audience showing fatigue first → suppress for 14 days, then re-engage
 
 Refresh = swap 50% of creatives in the ad set with new variants from `creative-studio`. Keep the top 1-2 performers.
@@ -145,6 +146,8 @@ Pause an ad set immediately if any are true:
 - ROAS < BE × 0.5 over 3 days
 - CPM > 2.0 × industry benchmark (from `ads_insights_industry_benchmark`) for 3 days
 - 0 purchases after spend ≥ 2 × target CPA
+- **Ad-set CTR < 0.8% at 48-72h** (course-tested kill threshold — distinct from the per-ad CTR < 0.5% rule, which only retires individual creatives)
+- **Hook Rate < 20% at 48-72h** — kill the ad set; creative isn't earning the impression
 - True ROAS (Shopify-reconciled, COD-discounted by RTO%) < 0.9 over 7 days even when in-platform ROAS looks fine
 - Pixel/CAPI quality drops below "good" for 48h (signal corrupted, decisions unsafe)
 
@@ -190,6 +193,20 @@ Before clicking Publish on any campaign, `ads-manager` confirms ALL of:
 - [ ] Ad set start time = 4:00 AM IST (for testing) or 12:00 AM IST (for scaling)
 - [ ] Naming convention enforced (Campaign: `<Product> – <Price>`, Ad set: interest, Ad: video number)
 - [ ] Pixel + CAPI healthy (dataset quality "good" or better)
+
+## Testing discipline — the Zuck Test
+
+When testing creatives, audiences, or angles, follow scientific-method rigor:
+
+- **Test ONE variable at a time.** Changing creative + audience + budget simultaneously means you never know what caused the result.
+- **Minimum test budget**: ₹300-500 per ad set / 48-72 hours before drawing conclusions. Below that, signal isn't statistically meaningful.
+- **Form a hypothesis before testing.** E.g., "Hook Rate dropped → hypothesis: thumbnail is weak → test: 3 new thumbnails on the same creative." Don't test randomly.
+- **Winning products reveal themselves**: consistent purchases, stable CPP, healthy front-end signals. Losing products either show high CTR + no purchases (product-market fit problem — page or offer issue) OR low CTR (creative problem).
+- The "Winning Product Test": if reducing budget on a "winner" kills results, the product is marginal — don't force scale.
+
+## Pre-warmup gate (new accounts)
+
+If the ad account is < 7 days old or just reinstated, **do not run the standard testing protocol**. Run `ad-account-warmup` playbook first. Demand for ₹1 lakh/day spend on a Day-1 account = throttle / ban. Account trust is earned, not bought.
 
 ## Auto-execute boundary (for ads-manager)
 

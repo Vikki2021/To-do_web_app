@@ -129,12 +129,35 @@ Always use a courier with COD remittance ≤ T+7 days. Cash flow dies otherwise.
   - **12:00 AM IST** — schedule budget changes for scaling. Learning re-stabilizes by morning.
   - Never launch tests live during the Indian working day — auction is more expensive and learning is noisier.
 - **Lowest CPM windows**: 11pm–2am IST and 7am–9am IST (commute scrolling). Schedule heavier delivery there.
+- **India CPM benchmark**: ₹50-150 per 1,000 impressions is the healthy band. Above ₹200 sustained = audience or creative problem.
 - **Avoid**: Tuesday early-morning spike days where political news dominates feed
 - **Placements**: Reels and Story drive best CPM-to-ROAS in tier-2/3; Feed dominates metros
 - **Languages targeting**: do not over-restrict; let Advantage+ Audience figure out language affinity
 - **Lookalikes**: 1% LAL of last-90d-purchasers > interests for cold scaling once you have 1000+ purchases
 - **Catalog/Advantage+ Shopping** kicks in beautifully once 10+ SKUs have ≥50 purchases each
 - **Testing structure** (per `ad-scaling-rules` Operator SOP): ABO single-interest at ₹200/ad set, 5 ad sets Day 1 + 5 more Day 2. CPP-led decisions, not ROAS.
+
+### India geo exclusions (mandatory for COD)
+
+Always exclude the following regions in every Meta ad set during testing and scaling — they have structurally lower delivery rates and significantly higher RTO in COD:
+
+- **Seven Sisters states** (Northeast India): Arunachal Pradesh, Assam, Manipur, Meghalaya, Mizoram, Nagaland, Tripura
+- **Jammu & Kashmir** + Ladakh
+- High-RTO pincodes from `docs/limits.md → cod_blocked_pincodes`
+
+Metros and tier-2/3 mainland India remain the productive ad geography. Re-evaluate the Northeast/J&K exclusion only after the account hits ≥1,000 confirmed purchases and you can A/B test geos with real RTO data per region.
+
+### Indian creative-quality benchmarks (post-launch)
+
+| Metric | Healthy | Warning | Kill signal |
+|---|---|---|---|
+| **CPP** (Cost Per Purchase) | ≤ 8% of SP (Target) | 8-12% of SP | > 12% of SP for 2 days |
+| **Hook Rate** (3-sec views ÷ impressions) | ≥ 30% | 20-30% — creative is borderline | < 20% — creative is the problem, not the audience |
+| **CTR** (link) | ≥ 1% (testing) / ≥ 2% (scaling) | 0.8-1% | < 0.8% at ad-set level after 48-72h |
+| **CPC** | < ₹7.5 (testing) / < ₹5 (scaling) | ₹7.5-12 | > ₹12 sustained |
+| **CPM** | ₹50-150 | ₹150-200 | > ₹200 sustained = bad audience-creative fit |
+
+CPP is the single north-star metric — the others are diagnostic. ROAS is a **vanity metric in India COD** until reconciled against actual delivered revenue (per `ad-scaling-rules` Phase 7).
 
 ## 10. GST and legal
 

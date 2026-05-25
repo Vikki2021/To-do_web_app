@@ -48,6 +48,7 @@ Run the right playbook from `.claude/playbooks/`:
 - **Festival sale** → `festival-sale.md` — India festival calendar push (Diwali, Raksha Bandhan, etc.)
 - **Scale a winner** → `scale-winner.md` — when a product hits ROAS thresholds
 - **Kill a loser** → `kill-loser.md` — when products/ads breach kill rules
+- **Warm up new ad account** → `ad-account-warmup.md` — 7-day trust build for fresh/reinstated Meta ad accounts before scale-spend
 
 ## Operator interaction model
 

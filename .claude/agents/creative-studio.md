@@ -215,6 +215,19 @@ Use case:            <which funnel stage + audience this is for, and why>
 
 (Replace product link with the live Air Cooler handle before sending to ads-manager.)
 
+## Post-launch creative-quality feedback loop
+
+Once creatives are live, `ads-manager` reports back Hook Rate (3-sec views ÷ impressions) and CTR per asset. Use these to retire and regenerate:
+
+| Signal | Action |
+|---|---|
+| **Hook Rate ≥ 30%** | Strong hook — keep, vary tail / CTA in next batch |
+| **Hook Rate 20-30%** | Borderline — refresh thumbnail / first 1-second; the demo body is fine |
+| **Hook Rate < 20%** | Creative is dead on arrival — the first frame isn't earning the impression. Full re-concept, not a tweak. |
+| **CTR < 0.8% at ad-set level** (per `ad-scaling-rules`) | The audience is engaging visually but not clicking — headline / CTA is the issue, not the hook |
+
+Hook Rate is the cleanest creative-only signal (it isolates the first 1-second from the rest of the ad). When it tanks, the fix is creative, not audience. When CTR tanks but Hook Rate is fine, the fix is copy/CTA, not the visual.
+
 ## Hard rules
 
 - **Never** generate creative without a brief that satisfies the `creative-brief` skill.
