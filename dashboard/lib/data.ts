@@ -122,7 +122,7 @@ export async function getDashboardData(): Promise<DashboardData> {
         : null,
     meta:
       sources.meta && !metaKpi
-        ? 'Configured but fetch returned no data. Likely auth failure or insufficient scopes — verify META_ACCESS_TOKEN has ads_read + ads_management.'
+        ? 'Configured but fetch returned no insights data. Most likely cause: no active campaigns on the ad account (Meta insights endpoint returns empty until at least one campaign has spend). If campaigns ARE running, then verify META_ACCESS_TOKEN scopes include ads_read + ads_management.'
         : null,
     notion:
       sources.notion.festival && !festivals
