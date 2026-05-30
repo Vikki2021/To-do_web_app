@@ -55,12 +55,33 @@ Output: count by flow + drafts awaiting operator approval.
 Output: list of ad sets needing refresh, briefs auto-drafted.
 
 ### 7. India-specific check-in (india-localizer)
-> "Anything festival-window relevant in next 14 days? Any sale prep we should kick off today?"
+> "Anything festival-window relevant in next 21 days? Any seasonal window closing? Any sale prep we should kick off today?"
 
-Output: festival prep todos for `ops-planner`.
+Output: festival prep todos + seasonal urgency flags for `ops-planner`.
 
-### 8. Logging (ops-planner)
+### 7b. Seasonal urgency check
+For any product with a seasonal demand window (cooling fans, festival gifting, monsoon gear), state:
+> "Cooling window: ~N days remaining before monsoon. Heating pad: evergreen. [product]: N days."
+
+Flag immediately if a seasonal window is <7 days away and no campaign is live.
+
+### 8. Ad account warmup check (performance-coach)
+If the Meta ad account is in the 7-day warmup phase, include this block:
+
+```
+📈 WARMUP DAY N/7
+Yesterday spend:  ₹X  (cap ₹1,000)
+Purchase events:  N
+EMQ:              N/10
+Strikes:          N
+Status: ON TRACK / DRIFT / HALT
+```
+
+### 9. Logging (ops-planner)
 > "Log today's KPIs and decisions to the Notion 'Daily Standup Log' database."
+
+### 10. Friday only — Performance Coach weekly review
+> "Run the `performance-coach` weekly health score. Produce the 5-dimension score, 3 wins, 3 problems, and next week's priority list."
 
 ## Operator deliverable
 
@@ -69,6 +90,8 @@ By the end, the operator has:
 - Approved/rejected ads moves
 - Approved/sent customer drafts
 - Today's order pipeline status
+- Seasonal urgency flags
+- Warmup day status (if applicable)
 - Tomorrow's prep queue
 
 ## Hard rule

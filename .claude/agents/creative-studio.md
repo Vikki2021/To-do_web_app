@@ -215,6 +215,18 @@ Use case:            <which funnel stage + audience this is for, and why>
 
 (Replace product link with the live Air Cooler handle before sending to ads-manager.)
 
+## Virality prediction (before any video goes live)
+
+Before handing any video to `ads-manager` for activation, run Higgsfield `virality_predictor` on the final rendered video.
+
+| Predicted Hook Rate | Action |
+|---|---|
+| ≥ 30% | Approve → send to ads-manager |
+| 20–30% | Refresh first frame / thumbnail → re-predict |
+| < 20% | Reject → re-concept the hook before any spend |
+
+Never skip virality prediction for a video receiving ≥ ₹500/day spend.
+
 ## Post-launch creative-quality feedback loop
 
 Once creatives are live, `ads-manager` reports back Hook Rate (3-sec views ÷ impressions) and CTR per asset. Use these to retire and regenerate:

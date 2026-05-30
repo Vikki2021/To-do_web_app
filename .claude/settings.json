@@ -72,6 +72,10 @@
       "mcp__132e1d02-a096-4f3a-9651-46785f2dd39b__ads_catalog_get_product_sets",
       "mcp__132e1d02-a096-4f3a-9651-46785f2dd39b__ads_catalog_get_products",
       "mcp__132e1d02-a096-4f3a-9651-46785f2dd39b__ads_catalog_search_product",
+      "mcp__132e1d02-a096-4f3a-9651-46785f2dd39b__ads_library_search",
+      "mcp__132e1d02-a096-4f3a-9651-46785f2dd39b__ads_pixel_event_read",
+      "mcp__132e1d02-a096-4f3a-9651-46785f2dd39b__ads_get_customconversions",
+      "mcp__132e1d02-a096-4f3a-9651-46785f2dd39b__ads_get_ad_preview",
       "mcp__132e1d02-a096-4f3a-9651-46785f2dd39b__ads_get_creative_ads",
       "mcp__132e1d02-a096-4f3a-9651-46785f2dd39b__ads_get_creatives",
       "mcp__132e1d02-a096-4f3a-9651-46785f2dd39b__ads_get_ad_images",
@@ -110,6 +114,7 @@
       "mcp__578a173b-dd81-40ff-909e-7aef43dd3f37__get-data",
 
       "mcp__9bf388f1-04dc-4595-bd49-6d3ec190824a__balance",
+      "mcp__9bf388f1-04dc-4595-bd49-6d3ec190824a__virality_predictor",
       "mcp__9bf388f1-04dc-4595-bd49-6d3ec190824a__list_workspaces",
       "mcp__9bf388f1-04dc-4595-bd49-6d3ec190824a__select_workspace",
       "mcp__9bf388f1-04dc-4595-bd49-6d3ec190824a__models_explore",

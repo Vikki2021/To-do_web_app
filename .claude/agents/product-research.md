@@ -24,8 +24,9 @@ For India-specific signals (COD viability, RTO risk, festival fit, language), co
 1. **Frame the hypothesis** — who buys this, what problem it solves, why now.
 2. **Pre-screen against the 13-KPI checklist** (`winning-product-criteria` §0). Need **≥7/13** to continue. Report YES/NO per KPI plus the hit-count. If pre-screen <7, STOP — log KILL with the failed KPIs and return. Do not pull demand signals or depth-score a product that fails this gate.
 3. **Pull demand signals** in parallel (only if pre-screen passes):
-   - Supermetrics: TikTok / YouTube / Google Trends / Meta Ads Library equivalents
-   - Meta Ads: industry benchmarks + auction ranking benchmarks for the vertical
+   - **Meta Ads Library** (`ads_library_search`) — **run this first**: search the product niche in India, filter ACTIVE ads. If 3+ advertisers are running 5+ ads each for 14+ days = proof of concept (KPI #4 = YES). Capture one competitor ad URL for the brief.
+   - Supermetrics: TikTok / YouTube / Google Trends signals for the vertical
+   - Meta Ads: `ads_insights_industry_benchmark` + `ads_insights_auction_ranking_benchmarks` for the vertical — get CPM and CTR expectations before briefing spend
    - Shopify (own store): search related products, check past performance via `run-analytics-query`
    - WebSearch / WebFetch: AliExpress, IndiaMART, Meesho listings for landed cost; Amazon.in for saturation
    - **Capture the competitor Meta Ad Library URL** that satisfied pre-screen KPI #4 → goes into `arsenal.fb_ad_url` per the `unit-economics` Product Arsenal schema

@@ -14,7 +14,7 @@ Meta runs an auction behind every impression. A highly engaging ad can pay ₹5/
 
 Meta Ads MCP (`mcp__132e1d02-*`):
 - `ads_get_ad_accounts` — pick the right account
-- `ads_create_campaign` / `ads_create_ad_set` / `ads_create_ad`
+- `ads_create_campaign` / `ads_create_ad_set` / `ads_create_ad` / `ads_create_creative`
 - `ads_get_ad_entities` / `ads_update_entity` / `ads_activate_entity`
 - `ads_insights_*` — performance trend, anomaly signal, auction ranking benchmarks, industry benchmark, advertiser context
 - `ads_get_opportunity_score`, `ads_get_dataset_quality`, `ads_get_dataset_stats`
@@ -22,6 +22,10 @@ Meta Ads MCP (`mcp__132e1d02-*`):
 - `ads_get_pages_for_business` — page selection
 - `ads_get_errors` — diagnose failed launches
 - `ads_get_help_article` — when uncertain about a setting
+- **`ads_library_search`** — competitor creative intelligence: before any new product launch, search India Meta Ads Library for the vertical. Extract hook styles, formats, running duration. Pass findings to `creative-studio` as competitive context.
+- **`ads_get_ad_preview`** — review creative rendering before activating. Catch broken overlays and aspect ratio errors.
+- **`ads_get_customconversions`** — verify `cod_confirmed` custom conversion is wired before campaign launch
+- **`ads_pixel_event_read`** — confirm all 5 standard events firing before spend
 
 Cross-platform truth (validate Meta numbers vs):
 - Supermetrics MCP (`mcp__3aa1be23-*`)
@@ -47,6 +51,24 @@ Operator's tested SOP is encoded in the `ad-scaling-rules` "Operator SOP — Ind
    - Front-end gates at scale: CPC < ₹5 · CTR ≥ 1%
 4. **Retargeting** — once we have 1,000+ pixel events: ATC30, VV75-30d, Engaged-90d. Frequency cap 1.5/week.
 5. **Advantage+ Shopping (ASC)** — once catalog has ≥10 products with consistent sales and a single product crosses ₹50k/day.
+
+## Pre-launch gate
+
+**Before building any campaign, run the `launch-ready` skill.** It validates pixel, checkout, inventory, creative, economics, and campaign structure in one pass → GREEN / YELLOW / RED. A RED verdict blocks launch.
+
+## Competitive creative intelligence (before every new product launch)
+
+Run `ads_library_search` for the product's niche. Scan for:
+- Competitors running 5+ ads sustained 14+ days (proof of concept)
+- Dominant format (Reels UGC / static image / carousel)
+- Top hook structures (problem-agitation / transformation / price-contrast)
+- Angle saturation — if all competitors use the same hook, brief a differentiated angle
+
+Output a 3-line competitive creative note → attach to the `creative-brief` before handing to `creative-studio`.
+
+## Virality check (video ads only)
+
+Before activating any video ad set, use Higgsfield `virality_predictor` on the final video. If predicted Hook Rate <25%, send back to `creative-studio` for first-frame / thumbnail refresh before any spend.
 
 ## Campaign launch checklist (pre-publish)
 
