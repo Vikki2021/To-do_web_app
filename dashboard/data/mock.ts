@@ -233,4 +233,159 @@ export const agentMeta: Record<string, { icon: string; accent: string; tagline: 
   'order-fulfillment': { icon: 'Package', accent: 'teal', tagline: 'COD verify, ship, NDR chase' },
   'ops-planner': { icon: 'CalendarDays', accent: 'saffron', tagline: 'Notion, Calendar, Vercel' },
   'india-localizer': { icon: 'Languages', accent: 'cream', tagline: 'Hinglish, COD, RTO, festivals' },
+  'performance-coach': { icon: 'Gauge', accent: 'teal', tagline: 'Weekly health score + patterns' },
+  'email-marketer': { icon: 'Mail', accent: 'cream', tagline: 'Abandoned cart + win-back flows' },
+  'inventory-planner': { icon: 'Boxes', accent: 'saffron', tagline: 'Reorder + festival multipliers' },
+  'pixel-doctor': { icon: 'Activity', accent: 'teal', tagline: 'Meta Pixel + CAPI diagnosis' },
+  'competitor-spy': { icon: 'Eye', accent: 'cream', tagline: 'Rival dossiers · analysis only' },
 };
+
+// --- Performance coach: 5-dimension health score ---
+export type HealthDimension = {
+  key: 'acquisition' | 'conversion' | 'retention' | 'operations' | 'infrastructure';
+  label: string;
+  score: number; // 0-20
+  notes: string;
+};
+
+export type HealthScore = {
+  total: number;       // 0-100
+  trend: 'up' | 'down' | 'flat';
+  deltaWoW: number;    // delta vs last week
+  dimensions: HealthDimension[];
+};
+
+export const healthScore: HealthScore = {
+  total: 64,
+  trend: 'up',
+  deltaWoW: 6,
+  dimensions: [
+    { key: 'acquisition',    label: 'Acquisition',    score: 11, notes: 'ROAS 2.34x · 7 campaigns · CPM stable' },
+    { key: 'conversion',     label: 'Conversion',     score: 12, notes: 'CVR 1.92% · AOV ₹1,184 · checkout solid' },
+    { key: 'retention',      label: 'Retention',      score:  9, notes: '32% repeat · winback flow drafted' },
+    { key: 'operations',     label: 'Operations',     score: 17, notes: 'Dropdash live · NDR <10% · 94 shipped' },
+    { key: 'infrastructure', label: 'Infrastructure', score: 15, notes: 'Pixel EMQ 6.4 · CAPI OK · Notion synced' },
+  ],
+};
+
+// --- Launch-Ready Gate (7 domains) ---
+export type LaunchDomain = {
+  key: string;
+  label: string;
+  pass: number;       // checks passing
+  total: number;      // total checks
+  verdict: 'green' | 'yellow' | 'red';
+  blockers: string[]; // RED items only
+};
+
+export type LaunchReadiness = {
+  product: string;
+  productHandle: string;
+  verdict: 'green' | 'yellow' | 'red';
+  domains: LaunchDomain[];
+  etaToFix: string;
+};
+
+export const launchReadiness: LaunchReadiness = {
+  product: 'Cordless Menstrual Heating Pad',
+  productHandle: 'cordless-menstrual-heating-pad',
+  verdict: 'red',
+  etaToFix: '4-6 hours',
+  domains: [
+    { key: 'tracking',    label: 'Tracking',    pass: 0, total: 6, verdict: 'red',    blockers: ['Pixel EMQ unverified (Meta MCP OAuth expired)', 'Meta↔Shopify revenue reconciliation pending'] },
+    { key: 'store',       label: 'Store',       pass: 2, total: 9, verdict: 'red',    blockers: ['Live checkout test not done — 65 sessions, 0 checkouts'] },
+    { key: 'inventory',   label: 'Inventory',   pass: 3, total: 4, verdict: 'green',  blockers: [] },
+    { key: 'creative',    label: 'Creative',    pass: 2, total: 8, verdict: 'red',    blockers: ['No creative brief for Heating Pad', 'No compliance review on creatives'] },
+    { key: 'campaign',    label: 'Campaign',    pass: 0, total: 9, verdict: 'yellow', blockers: [] },
+    { key: 'economics',   label: 'Economics',   pass: 2, total: 4, verdict: 'yellow', blockers: [] },
+    { key: 'fulfillment', label: 'Fulfillment', pass: 1, total: 4, verdict: 'yellow', blockers: [] },
+  ],
+};
+
+// --- Ad account warmup tracker ---
+export type Warmup = {
+  active: boolean;
+  day: number;
+  maxDays: number;
+  spendToday: number;
+  spendCap: number;
+  purchases: number;
+  purchaseTarget: number;
+  emq: number;
+  emqTarget: number;
+  strikes: number;
+  status: 'ON TRACK' | 'DRIFT' | 'HALT';
+};
+
+export const warmup: Warmup = {
+  active: true,
+  day: 3,
+  maxDays: 7,
+  spendToday: 842,
+  spendCap: 1000,
+  purchases: 2,
+  purchaseTarget: 5,
+  emq: 6.4,
+  emqTarget: 6.0,
+  strikes: 0,
+  status: 'ON TRACK',
+};
+
+// --- COD verification / RTO ladder ---
+export type RtoTier = {
+  key: 'A' | 'B' | 'C';
+  label: string;
+  threshold: string;
+  count: number;
+  cancelledNoReply: number;
+};
+
+export type RtoLadder = {
+  rtoRate7d: number;       // %
+  target: number;          // %
+  tiers: RtoTier[];
+};
+
+export const rtoLadder: RtoLadder = {
+  rtoRate7d: 23.4,
+  target: 20,
+  tiers: [
+    { key: 'A', label: 'Tier A · Email confirm', threshold: '≤ ₹999',     count: 18, cancelledNoReply: 2 },
+    { key: 'B', label: 'Tier B · Email + WhatsApp', threshold: '₹999–1999', count: 9,  cancelledNoReply: 1 },
+    { key: 'C', label: 'Tier C · Phone call YES', threshold: '> ₹1999',    count: 3,  cancelledNoReply: 0 },
+  ],
+};
+
+// --- Action queue (operator's priority list) ---
+export type ActionPriority = 'red' | 'yellow' | 'info';
+export type ActionItem = {
+  id: string;
+  priority: ActionPriority;
+  task: string;
+  owner: string;
+  eta: string;
+  prompt?: string; // optional Claude Code command to copy
+};
+
+export const actionQueue: ActionItem[] = [
+  { id: 'a1', priority: 'red',    task: 'Reconnect Meta Ads MCP OAuth',                     owner: 'operator',       eta: '15 min', prompt: 'Open Claude Code settings → MCP Servers → Meta Ads → Reconnect' },
+  { id: 'a2', priority: 'red',    task: 'Confirm Heating Pad landed cost (Dropdash invoice)', owner: 'operator',     eta: '5 min' },
+  { id: 'a3', priority: 'red',    task: 'Live checkout test on Heating Pad PDP',             owner: 'operator',       eta: '10 min', prompt: 'Verify the checkout works on the Heating Pad product page.' },
+  { id: 'a4', priority: 'yellow', task: 'Fix Heating Pad product page (compare-at, COD badge, slug, description)', owner: 'store-manager',  eta: '30 min', prompt: 'Enrich the Heating Pad product page — set compareAt ₹1,679, add COD badge, fix handle, rewrite description per conversion-page-blueprint skill.' },
+  { id: 'a5', priority: 'yellow', task: 'Brief creative-studio with 3 angles (freedom / contrast / social proof)', owner: 'creative-studio', eta: 'async', prompt: 'Build 3-angle creative brief for Heating Pad: freedom angle, contrast angle, social proof. Hinglish, UGC, 9:16 master + reframe to 4:5 + 1:1.' },
+  { id: 'a6', priority: 'yellow', task: 'Emergency restock Neck Fan to 150u via Dropdash',   owner: 'operator',       eta: '5 min' },
+];
+
+// --- Seasonal urgency (windows + days remaining) ---
+export type SeasonalAlert = {
+  product: string;
+  window: 'cooling' | 'monsoon' | 'festival' | 'winter';
+  daysRemaining: number;
+  campaignLive: boolean;
+};
+
+export const seasonalAlerts: SeasonalAlert[] = [
+  { product: 'Neck Fan',       window: 'cooling',  daysRemaining: 18, campaignLive: false },
+  { product: 'Spray Desk Fan', window: 'cooling',  daysRemaining: 18, campaignLive: false },
+  { product: 'Heating Pad',    window: 'festival', daysRemaining: 999, campaignLive: false },
+];
