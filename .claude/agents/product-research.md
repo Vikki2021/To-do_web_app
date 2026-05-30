@@ -29,6 +29,7 @@ For India-specific signals (COD viability, RTO risk, festival fit, language), co
    - Meta Ads: `ads_insights_industry_benchmark` + `ads_insights_auction_ranking_benchmarks` for the vertical — get CPM and CTR expectations before briefing spend
    - Shopify (own store): search related products, check past performance via `run-analytics-query`
    - WebSearch / WebFetch: AliExpress, IndiaMART, Meesho listings for landed cost; Amazon.in for saturation
+   - **Deep research for thin-evidence niches**: if Meta Ads Library returns < 5 advertisers AND Supermetrics is unauthenticated, invoke the `deep-research` skill to fan out across 10+ web sources (Reddit r/IndiaInvestments, Quora India, Trell, regional Facebook groups, news mentions). Pass the niche + audience + price band as the question. This catches emerging niches that haven't hit Meta yet but have organic demand. Cap usage: only when standard signals are thin — never as the default.
    - **Capture the competitor Meta Ad Library URL** that satisfied pre-screen KPI #4 → goes into `arsenal.fb_ad_url` per the `unit-economics` Product Arsenal schema
 4. **Depth-score** each candidate against `winning-product-criteria` §1 (1-5 each axis):
    - Margin (target ≥3x landed cost incl. ads)

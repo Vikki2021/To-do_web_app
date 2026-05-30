@@ -74,6 +74,11 @@ Run the right playbook from `.claude/playbooks/`:
 | "Log today's KPIs to Notion" | `ops-planner` |
 | "Restock [SKU]" | `inventory-planner` (flags for operator Dropdash action) |
 | "COD verification for today" | `cod-verification-daily.md` playbook |
+| "Reframe this video to all placements" | `creative-studio` → Higgsfield `reframe` (9:16 → 4:5 + 1:1) |
+| "Deep-research this niche" | `product-research` + `deep-research` skill |
+| "Auto-run daily ops every morning" | `loop` skill at 24h interval |
+| "Verify the checkout works" | `verify` skill drives a live test order |
+| "Audit my harness changes" | `code-review` / `security-review` skill |
 
 ## Operator interaction model
 
@@ -105,6 +110,20 @@ swappable. **Do not hardcode numbers in agent prompts.** Reference the skill.
 - `whatsapp-templates` — Hinglish + English templates for every customer-facing intent
 - `launch-ready` — pre-launch validation gate (7 domains, GREEN/YELLOW/RED verdict)
 - `rto-prevention` — RTO reduction tactics (verification tiers, pincode blocking, prepaid conversion)
+
+## Claude Code system skills wired into the harness
+
+These are first-party Claude Code skills (not business skills) that agents and the operator can invoke:
+
+| Skill | Used by | When |
+|---|---|---|
+| `deep-research` | `product-research`, `competitor-spy` | Thin-evidence niches — fan out across 10+ web sources with fact-checking |
+| `loop` | `ops-planner` | Auto-run `daily-ops.md` at 24h interval when operator unavailable |
+| `verify` | `launch-ready` (S1 check), `pixel-doctor` | Drive the live store in a real browser to confirm checkout works |
+| `update-config` | Operator | Add hooks, permissions, env vars to `.claude/settings.json` without hand-editing |
+| `fewer-permission-prompts` | Operator (monthly) | Scan transcripts → expand the allow list to cut prompts |
+| `code-review` / `simplify` | Operator | Quality pass on changes to the harness itself (agents, skills, playbooks) |
+| `security-review` | Operator (before pushing harness changes) | Audit the diff for risky permissions or leaked credentials |
 
 ## Safety defaults
 

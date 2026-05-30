@@ -6,6 +6,7 @@ Run every morning, ~15 minutes operator time. Claude does the work; operator app
 
 - Calendar event "Daily Ops" 9:30 IST (created by `ops-planner`)
 - Or operator says "run daily ops" / "morning routine"
+- **Auto-recurring option**: operator invokes `loop` skill with interval `24h` and command "run daily ops" — Claude self-paces the morning routine every day without manual trigger. Use this when operator is travelling / unavailable for the 9:30 call.
 
 ## Sequence
 

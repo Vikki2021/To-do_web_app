@@ -29,7 +29,7 @@ One or more YELLOW items = launch with monitoring, fix within 24h.
 
 | # | Check | How to verify | Pass |
 |---|---|---|---|
-| S1 | Live checkout test completed | Operator places test order on the exact product | ✓/✗ |
+| S1 | Live checkout test completed | Operator places test order, OR Claude invokes the `verify` skill to drive the checkout flow end-to-end | ✓/✗ |
 | S2 | Product page is ACTIVE (not draft) | `get-product` → status = ACTIVE | ✓/✗ |
 | S3 | Price matches launch brief | Product price = brief sell price | ✓/✗ |
 | S4 | Compare-at price set (shows discount) | compareAtPrice present, ≥ 1.3× sell price | ✓/✗ |
