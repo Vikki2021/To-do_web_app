@@ -135,7 +135,17 @@ Check per ad, daily, after 7+ days live:
 - CTR drop > 25% vs 7-day baseline → refresh
 - CPM rise > 25% vs 7-day baseline (and not industry-wide via `ads_insights_industry_benchmark`) → refresh
 - **Hook Rate** (3-sec video views ÷ impressions) **< 20%** → creative is the problem (not the audience) → refresh immediately. Strong Hook Rate is ≥ 30%; 20-30% is borderline; < 20% is dead on arrival.
+- **Hold Rate** (25%-completion video views ÷ impressions) **< 10%** → the hook earned the impression but the demo body lost the viewer. Refresh the middle 3-10 seconds, keep the first frame. Strong Hold Rate is ≥ 15%; 10-15% is OK; < 10% means the script/pacing is broken.
 - Repeat-purchase audience showing fatigue first → suppress for 14 days, then re-engage
+
+**Hook Rate vs Hold Rate diagnostic:**
+
+| Hook Rate | Hold Rate | Diagnosis | Fix |
+|---|---|---|---|
+| ≥ 30% | ≥ 15% | Strong creative top-to-bottom | Scale + clone hook into new variants |
+| ≥ 30% | < 10% | Hook works, demo body is dead | Refresh middle 3-10s, keep first frame |
+| < 20% | (any) | First frame failed; viewer never engaged | Full re-concept; thumbnail + first-frame redo |
+| 20-30% | ≥ 15% | Borderline hook with strong body | Refresh thumbnail / first 1s only — body is fine |
 
 Refresh = swap 50% of creatives in the ad set with new variants from `creative-studio`. Keep the top 1-2 performers.
 
@@ -203,6 +213,23 @@ When testing creatives, audiences, or angles, follow scientific-method rigor:
 - **Form a hypothesis before testing.** E.g., "Hook Rate dropped → hypothesis: thumbnail is weak → test: 3 new thumbnails on the same creative." Don't test randomly.
 - **Winning products reveal themselves**: consistent purchases, stable CPP, healthy front-end signals. Losing products either show high CTR + no purchases (product-market fit problem — page or offer issue) OR low CTR (creative problem).
 - The "Winning Product Test": if reducing budget on a "winner" kills results, the product is marginal — don't force scale.
+- **If it works, it works from the start.** Strong products show signal in 48-72h. Do not "give it more time" on a flat ad set hoping it will turn around — that's hope, not data. Pareto applies: 80% of revenue comes from 20% of what you test. Cut losers fast so you can fund the next winner.
+- **Pareto on the ad-set table**: of 10 ad sets launched, expect 2 to scale, 3 to maintain, 5 to die. That's healthy. If 8/10 are dying, your *product* or *creative* is the problem, not the audiences.
+
+## Performance diagnostic decision tree (when results are off)
+
+Before changing budgets or audiences, classify the failure mode:
+
+| Symptom | Likely cause | Fix |
+|---|---|---|
+| Low CTR (<1%) + low CPC | Creative isn't earning impressions | Refresh hook/thumbnail (`creative-studio`) |
+| High CTR (>2%) + low CVR (<1%) + no purchases | Landing page / product mismatch, NOT creative | Audit PDP — price match, COD badge, trust elements (`store-manager`); don't drop price reflexively |
+| High CTR + good CVR + high RTO | Audience too broad / wrong intent | Tighten interests, add price anchor to ad copy, exclude impulse-buyer geos (`rto-prevention`) |
+| Stable CPP + sudden CPM spike | Auction shift or fatigue | Check `ads_insights_industry_benchmark` first — if vertical-wide, hold. If account-specific, creative refresh. |
+| Good Hook Rate (≥30%) + low CTR | Hook works visually, copy/CTA is weak | Same creative, swap headline + CTA only |
+| Meta ROAS ≥2× + Shopify true ROAS <1× | RTO eating margin OR pixel over-attributing | Reconcile per Phase 7 + check `pixel-doctor` |
+
+This tree saves the operator from the most common mistake: dropping price when CTR is high but conversion is low. That's a landing page problem, not a price problem.
 
 ## Pre-warmup gate (new accounts)
 

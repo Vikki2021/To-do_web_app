@@ -11,23 +11,43 @@ If a field is missing, demand it from the requester before generating.
 ## Required
 
 ```
-PRODUCT:        <name + SKU>
-LANDING URL:    <product or advertorial URL>
-PRICE / OFFER:  <₹ + COD/discount mention>
-HOOK:           <one-sentence problem-promise>
-ANGLE:          <one of: problem | dream | curiosity | authority | before-after | social-proof | meme>
-AUDIENCE:       <persona, age range, geo, language tier>
-LANGUAGE:       <Hinglish | Hindi | English | regional>
-FORMAT:         <static | video | carousel | collection>
-ASPECT RATIOS:  <1:1 | 4:5 | 9:16 | multi>
-DURATION:       <if video: 6s / 10s / 15s / 30s>
-PLACEMENTS:     <feed | reels | story | explore | placements-all>
-VARIANT COUNT:  <default 6 per angle, 3 angles = 18>
-BRAND ELEMENTS: <logo on/off, color overlay, font>
-COMPLIANCE:     <claims allowed/not, disclaimers needed>
-DUE BY:         <date/time>
-DELIVERY:       <Drive folder + handoff agent>
+PRODUCT:           <name + SKU>
+LANDING URL:       <product or advertorial URL>
+PRICE / OFFER:     <₹ + COD/discount mention>
+HOOK:              <one-sentence problem-promise>
+ANGLE:             <one of: problem | dream | curiosity | authority | before-after | social-proof | meme>
+AUDIENCE:          <persona, age range, geo, language tier>
+LANGUAGE:          <Hinglish | Hindi | English | regional>
+FORMAT:            <static | video | carousel | collection>
+ASPECT RATIOS:     <1:1 | 4:5 | 9:16 | multi>
+DURATION:          <if video: 6s / 10s / 15s / 30s>
+PLACEMENTS:        <feed | reels | story | explore | placements-all>
+VARIANT COUNT:     <default 6 per angle, 3 angles = 18; Andromeda-era preference is MORE volume>
+BRAND ELEMENTS:    <logo on/off, color overlay, font>
+COMPLIANCE:        <claims allowed/not, disclaimers needed>
+OBJECTION KILLERS: <list the top 3 buyer objections this creative must defuse — see below>
+DUE BY:            <date/time>
+DELIVERY:          <Drive folder + handoff agent>
 ```
+
+### Objection Killers — required field
+
+Every Indian COD buyer carries 3-5 silent objections that kill the purchase if unaddressed. The brief MUST name the top 3 for this SKU and how the creative defuses each. If the brief doesn't list objection killers, the creative will leak conversion.
+
+Common objection patterns (pick the top 3 for the product):
+
+| Objection | Killer in creative |
+|---|---|
+| "Is this a scam?" | COD badge visible, real UGC unboxing, phone number on screen |
+| "Will it actually work?" | Demo in the first 5 seconds, not testimonial-only |
+| "Is the size right?" | Show product next to a hand / a household object for scale |
+| "Will I be cheated on COD?" | "Pay only when you receive" caption + return badge |
+| "Is the quality cheap?" | Close-up on material, packaging unbox, "premium feel" demo |
+| "What if it breaks?" | "7-day no-questions return" / replacement guarantee on-screen |
+| "Will it ship to my pincode?" | "All-India COD delivery" or "Free shipping pan-India" tag |
+| "Too expensive?" | Price-anchor: "₹2,000 ki cheez sirf ₹999 mein" with a real reference |
+
+Skip this field = brief returned. No exceptions.
 
 ## Optional but recommended
 
@@ -71,6 +91,8 @@ DON'TS:         <e.g., no medical claims, no countdown timers, no fake reviews>
 - Any health claim ("cures", "guaranteed relief", "doctor approved") requires a written disclaimer placement OR must be removed.
 - Indian buyers see through fake — avoid stock-photo aesthetics for UGC angles.
 - Brand kit (Canva `list-brand-kits`) is the source of truth for logo + palette + font.
+- **Objection killers field is mandatory.** Brief returned if missing.
+- **Post-Andromeda creative volume rule** (per EEA Zuck Method): the algorithm rewards creative volume + diversity more than per-asset polish. Default batch = 6 variants × 3 angles = 18 assets. Don't ship fewer than 12. Faster iteration beats slower perfection.
 
 ## Sample brief (use as template)
 

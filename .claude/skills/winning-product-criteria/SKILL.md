@@ -118,6 +118,8 @@ Score each candidate 1-5 on every axis. **Total ≥24/35 → GO**. Below that, H
 - Items that fail Indian customs or BIS certification (some electronics)
 - Products requiring regulatory licenses you don't hold (cosmetics → CDSCO, food → FSSAI)
 - Items with known IP infringement (popular character merchandise without license)
+- **Apparel + footwear** — structurally high-RTO niches per EEA Coach Deep. Indian COD buyers see-and-decide-at-door on fit/color, RTO routinely hits 40-55%. Only launch with prepaid-only checkout or skip entirely.
+- **"Trendy not need-based"** SKUs that fail the 50% RTO survivability test — if NET margin at FAD 0.50 + CPP 8% + RTO 50% is ≤ ₹0, the SKU cannot absorb a normal-bad week and will bleed cash.
 
 ## GO / HOLD / KILL
 
@@ -135,3 +137,19 @@ A candidate must clear **both** layers:
 - Always show the score breakdown, not just the total.
 - Always state the **two weakest signals** (one from pre-screen NOs, one from lowest depth axis) and the operator action that would raise them.
 - If GO: produce the launch brief. If HOLD: produce the lift plan. If KILL: log and move on.
+
+## Mental models (codified from EEA Coach Ishan / Coach Ramesh)
+
+These are non-negotiable framing rules. Apply them to every product decision:
+
+### Products ≠ Marriage
+You are not committed to a SKU. The moment data says no, move on. Operators who fall in love with a product they "feel" should work burn cash trying to force it. **Cut losers fast, double-down on winners.** A KILL today is cheaper than a HOLD that bleeds for two weeks.
+
+### Data Over Emotion
+Never let "but I really like this product" override the 13-KPI / 7-axis / unit-economics gates. If three independent quantitative gates say NO, the answer is NO — your liking it is irrelevant data to the Indian buyer.
+
+### If It Works, It Works From the Start
+Strong products show strong signal in the first 48-72 hours. **Do not "give it more time" hoping a flat-ROAS product will turn around.** Pareto applies: 80% of revenue comes from 20% of products you test. Your job is to identify the 20% fast and kill the rest faster.
+
+### Process of Elimination
+Test enough products that the winners reveal themselves. A 1-in-10 winning rate is industry standard — you should be testing 10+ candidates a month to surface 1-2 scalable winners. Anything less and you're not running enough volume to find the real opportunities.

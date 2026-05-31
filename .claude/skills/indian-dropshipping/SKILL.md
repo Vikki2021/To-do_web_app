@@ -176,6 +176,28 @@ CPP is the single north-star metric — the others are diagnostic. ROAS is a **v
 - Visible return window (7-day no-questions even if you really do 3-day; the framing matters)
 - Trust badges (Razorpay, secure checkout)
 
+## 11b. Default India Shopify app stack (course-tested, EEA-validated)
+
+Every Indian Shopify store SHOULD have these installed before launching ads. They're the floor, not optional:
+
+| App | Purpose | Why mandatory |
+|---|---|---|
+| **Releasit COD App** | COD form + OTP at checkout | Cuts impulse-COD by 12-18%; removes the worst RTO sources |
+| **WATI** (WhatsApp Business API) | Automated WhatsApp confirmation, NDR, dispatch flows | Customer service that doesn't sleep; ~₹2,000/mo, pays back in 1 RTO prevented |
+| **Judge.me** or **Loox** | Product reviews with photos | Trust-building UGC; Indian buyers Google before COD |
+| **Numerous.ai** | AI product descriptions in Google Sheets | Bulk-write descriptions per `conversion-page-blueprint` for new SKUs at scale |
+
+Reference: `rto-prevention` skill Layer 2 for the verification workflow these apps power.
+
+## 11c. Roposo vs Amazon buyer psychology
+
+Two buyer pools, two strategies:
+
+- **Roposo / social commerce buyers** — discover via short video, impulse-buy, lean tier-2/3, expect COD, higher RTO (35-45% untreated), price-sensitive but reward novelty. Win with: video-first creatives, ₹699-999 pricing, simple checkout, Hindi voiceover.
+- **Amazon / search buyers** — researched intent, expect specs, trust ratings, prepaid-friendly, lower RTO (15-25%), price-comparison heavy. Win with: detailed listings, specs upfront, ratings, "compare to Amazon" copy in your D2C creatives only if you're cheaper.
+
+For Meta-Ads-driven D2C, you are fishing in the **Roposo buyer pool, not the Amazon pool**, even though you're sending them to your own Shopify store. Brief creatives + product pages accordingly: video demo > spec dump, COD assurance > price negotiation, novelty hook > authority claim.
+
 ## 12. Cash-flow rhythm (operator hygiene)
 
 - Daily: track COD remittance vs ad spend; ratio should be ≥1.4 weekly

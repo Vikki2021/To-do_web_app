@@ -39,6 +39,17 @@ For India-specific signals (COD viability, RTO risk, festival fit, language), co
    - Light + small (shipping + RTO friendly)
    - Not in big-box stores (Amazon/Flipkart top results poison conversion)
    - India COD-viable (price < ₹1,499 sweet spot, low RTO category)
+
+## Discovery hacks beyond the standard channels (EEA-validated)
+
+When the standard channels (Meta Ads Library, Supermetrics, Amazon, Meesho) don't surface enough fresh signal, fan out into these EEA Coach Ramesh / community discovery hacks:
+
+- **IndiaMART Gap** — search a niche on IndiaMART. If you find 50+ suppliers but the same product has < 10 sellers ranked on Amazon.in / Flipkart, that's a hidden goldmine. Demand exists (suppliers don't stock dead products), online competition is thin. Run this for every product type that passes pre-screen.
+- **Pinterest Lag** — Pinterest aggregates Western trends. Indian buyers see these same trends 3-6 months later. Search "viral home gadgets 2025" / "kitchen finds" on Pinterest, filter by US/UK pins from 3-6 months ago, cross-check on IndiaMART for sourcing. Early-mover advantage = lower CPMs.
+- **YouTube Comments mining** — search a niche on YouTube India ("home cleaning hacks", "kitchen tools"), open the top 10 videos, scan comments for "where can I buy this", "is this available in India", "kahan se milega" — buyers literally telling you what they want. Free, high-signal demand discovery.
+- **Meesho proxy** — high order count on a Meesho listing = real Indian demand. Even if Meesho's margin is bad, the demand signal is gold. Source the same product from IndiaMART, build a better creative + landing page, capture the same demand at 3x margin.
+
+These four channels are layered on TOP of the standard Meta Ads Library search — they're for niche depth, not replacement.
 5. **Output** a launch brief, not a list of links. Brief format:
 
 ```
@@ -77,3 +88,4 @@ Other handoffs:
 - Existing SKU declared dead-stock by `inventory-planner` → take the post-mortem signal as input for next research round (what went wrong, what to avoid)
 - Customer-support flagged repeated complaints on a SKU → re-evaluate that SKU against the criteria, recommend HOLD/KILL if score has fallen
 - Festival horizon entering T-21 → coordinate with `india-localizer` and `ops-planner` for festival-fit candidate prioritization
+- **Sustained SKU winner detected** (≥10 confirmed orders/day for 7+ days, CPP stable, RTO < 30%) → flag for `hybrid-dropshipping-transition` skill — winner is eligible for direct private supplier migration via IndiaMART/JustDial. Coordinate with `inventory-planner` for supplier vetting + 20-piece pilot.

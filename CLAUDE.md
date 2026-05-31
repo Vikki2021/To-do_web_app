@@ -79,6 +79,8 @@ Run the right playbook from `.claude/playbooks/`:
 | "Auto-run daily ops every morning" | `loop` skill at 24h interval |
 | "Verify the checkout works" | `verify` skill drives a live test order |
 | "Audit my harness changes" | `code-review` / `security-review` skill |
+| "Migrate [winner] to private supplier" | `hybrid-dropshipping-transition` skill via `inventory-planner` |
+| "Find me product ideas via Indiamart gap / Pinterest lag" | `product-research` (EEA discovery hacks) |
 
 ## Operator interaction model
 
@@ -109,7 +111,8 @@ swappable. **Do not hardcode numbers in agent prompts.** Reference the skill.
 - `inventory-thresholds` — reorder points, festival multipliers, dead-stock rules
 - `whatsapp-templates` — Hinglish + English templates for every customer-facing intent
 - `launch-ready` — pre-launch validation gate (7 domains, GREEN/YELLOW/RED verdict)
-- `rto-prevention` — RTO reduction tactics (verification tiers, pincode blocking, prepaid conversion)
+- `rto-prevention` — RTO reduction tactics (verification tiers, pincode blocking, prepaid conversion, FAD/NDR/RVP funnel, Releasit + WATI stack)
+- `hybrid-dropshipping-transition` — when and how to migrate a winning SKU from Dropdash/Roposo to a private IndiaMART supplier (10 orders/day trigger, 20-piece pilot, dual-supplier strategy)
 
 ## Claude Code system skills wired into the harness
 

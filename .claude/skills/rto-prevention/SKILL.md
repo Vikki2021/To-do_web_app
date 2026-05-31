@@ -15,6 +15,28 @@ RTO is the single biggest margin killer in Indian COD dropshipping. Every return
 
 **Default assumption:** 30% RTO on untreated COD. Below 20% = good. Below 15% = excellent.
 
+## Three-step delivery funnel (memorize the terminology)
+
+Per EEA Coach Deep — every COD parcel goes through three named gates:
+
+| Stage | Acronym | Meaning | Where it fails → RTO |
+|---|---|---|---|
+| 1 | **FAD** | First Attempt Delivery | Buyer not home / refused at door |
+| 2 | **NDR** | Non-Delivery Report (after FAD fail) | Buyer unresponsive to re-delivery attempts |
+| 3 | **RVP** | Return Visit Pickup | Courier picks up the rejected parcel — RTO closes |
+
+Every fix in this playbook targets one of these three gates. Knowing *which* gate is leaking tells you which fix to apply.
+
+## RTO root cause: product / targeting / creative
+
+When RTO rises on a SKU, classify the cause into one of three buckets before fixing:
+
+- **Product problem** — buyer received and rejected at the door because the physical item disappointed (wrong color / cheap feel / smaller than expected). Fix: better creatives showing scale + real material + better supplier. Often signals HDM transition (`hybrid-dropshipping-transition` skill).
+- **Targeting problem** — wrong audience saw the ad and ordered impulsively, then refused. Fix: tighten interests (problem-specific over generic), exclude high-RTO geos/pincodes, raise price-anchoring in ad copy.
+- **Creative problem** — ad overpromised or showed an unrealistic transformation. Buyer feels misled. Fix: trim claims, drop fake before/afters, use real UGC unboxing, lower the dream-gap.
+
+If you don't know which one, the verification call data tells you — ask "why are you refusing?" on outbound NDR calls. The answer maps to one of the three.
+
 ---
 
 ## Layer 1 — Audience Quality (reduce low-intent buyers upstream)
@@ -45,6 +67,16 @@ Apply to every ad set per `indian-dropshipping` §9:
 ---
 
 ## Layer 2 — Order Verification (catch rejections before dispatch)
+
+### Default Shopify app stack (course-tested)
+
+| Need | App | Why |
+|---|---|---|
+| COD form + OTP at checkout | **Releasit COD App** | Industry standard; OTP cuts impulse-COD by ~12-18%. Required on every Indian Shopify store. |
+| WhatsApp confirmation flows | **WATI** (WhatsApp Business API) | Templates auto-fire on order, NDR, dispatch. Replies route to a single ops inbox. ~₹2,000/mo. |
+| Pincode/COD blocking | Native Shopify Markets + manual `cod_blocked_pincodes` from `docs/limits.md` | Block before the buyer can place the order |
+
+Both Releasit + WATI together reduce RTO by 8-15 percentage points on a typical store. They're the floor — install both before testing any RTO-reduction tactics below.
 
 ### Verification tier system (non-negotiable)
 
@@ -169,3 +201,5 @@ Run every Friday. Classify RTOs by reason code:
 - Verification rate dropping → `customer-support` (tighten scripts)
 - Prepaid conversion low → `store-manager` (add prepaid incentive to PDP) + `email-marketer` (UPI nudge in confirmation email)
 - Courier NDR rate rising → `order-fulfillment` (courier switch evaluation)
+- **Sustained SKU success with RTO 25-30%** → consider migrating to private supplier via `hybrid-dropshipping-transition` skill. Direct suppliers typically run their own pre-dispatch verification call, cutting RTO 5-15 percentage points on top of the layers above.
+- **High-RTO niche** detected (apparel / footwear / fit-dependent SKUs) → `product-research` to KILL the SKU or convert to prepaid-only checkout.
