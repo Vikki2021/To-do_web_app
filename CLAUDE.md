@@ -13,6 +13,7 @@ and settings that let one operator run every pillar of the business through Clau
 | Creative | `creative-studio` | Higgsfield + Canva ad creatives and product imagery |
 | Paid ads | `ads-manager` | Meta Ads campaigns, scaling rules, kill rules, budgets |
 | Analytics | `marketing-analytics` | Supermetrics + Windsor cross-channel KPIs and anomaly alerts |
+| Strategy | `performance-coach` | Weekly health score, pattern detection, next-week priority plan |
 | Customer support | `customer-support` | Gmail triage, order lookup, refund/COD/RTO handling |
 | Outbound email/WA | `email-marketer` | Abandoned cart, post-purchase, win-back, festival broadcasts |
 | Order fulfillment | `order-fulfillment` | Order status, tracking emails, NDR/RTO chase |
@@ -48,6 +49,38 @@ Run the right playbook from `.claude/playbooks/`:
 - **Festival sale** → `festival-sale.md` — India festival calendar push (Diwali, Raksha Bandhan, etc.)
 - **Scale a winner** → `scale-winner.md` — when a product hits ROAS thresholds
 - **Kill a loser** → `kill-loser.md` — when products/ads breach kill rules
+- **Warm up new ad account** → `ad-account-warmup.md` — 7-day trust build for fresh/reinstated Meta ad accounts before scale-spend
+
+## Quick Commands (plain English → agent)
+
+| What you say | What runs |
+|---|---|
+| "Run daily ops" / "morning routine" | `daily-ops.md` playbook (all agents) |
+| "What did we make yesterday?" | `marketing-analytics` |
+| "How's the business?" / "weekly review" | `performance-coach` + `weekly-review.md` |
+| "Reply to today's customer emails" | `customer-support` |
+| "Launch [product]" | `launch-product.md` playbook |
+| "Is [product] launch-ready?" | `launch-ready` skill via `ads-manager` |
+| "Scale [product]" | `scale-winner.md` playbook |
+| "Kill [product/ad]" | `kill-loser.md` playbook |
+| "Top winning products from my store" | `product-research` |
+| "Spy on [competitor store URL]" | `competitor-spy` |
+| "Build ad creatives for [product]" | `creative-studio` + `india-localizer` |
+| "Check inventory" | `inventory-planner` |
+| "Fix my tracking" / "pixel broken" | `pixel-doctor` |
+| "Reduce my RTO" | `rto-prevention` skill + `customer-support` |
+| "Check my engagement campaign" | `ads-manager` |
+| "What's the festival window?" | `india-localizer` |
+| "Log today's KPIs to Notion" | `ops-planner` |
+| "Restock [SKU]" | `inventory-planner` (flags for operator Dropdash action) |
+| "COD verification for today" | `cod-verification-daily.md` playbook |
+| "Reframe this video to all placements" | `creative-studio` → Higgsfield `reframe` (9:16 → 4:5 + 1:1) |
+| "Deep-research this niche" | `product-research` + `deep-research` skill |
+| "Auto-run daily ops every morning" | `loop` skill at 24h interval |
+| "Verify the checkout works" | `verify` skill drives a live test order |
+| "Audit my harness changes" | `code-review` / `security-review` skill |
+| "Migrate [winner] to private supplier" | `hybrid-dropshipping-transition` skill via `inventory-planner` |
+| "Find me product ideas via Indiamart gap / Pinterest lag" | `product-research` (EEA discovery hacks) |
 
 ## Operator interaction model
 
@@ -55,10 +88,13 @@ You (the operator) talk to Claude in plain English. Claude routes to the right
 subagent automatically. Examples that work without naming an agent:
 
 - "What did we make yesterday?" → `marketing-analytics`
+- "How's the business this week?" → `performance-coach`
 - "Reply to today's customer emails" → `customer-support`
 - "Launch the neck massager I added to Notion" → orchestrates 4 agents
 - "Pause anything below 1.2 ROAS over 3 days" → `ads-manager`
 - "Build me 6 ad variants for SKU NM-001 in Hinglish" → `creative-studio` + `india-localizer`
+- "Reduce my RTO — it's 38%" → `rto-prevention` skill + `customer-support` + `ads-manager`
+- "Is the heating pad ready to launch?" → `launch-ready` skill
 
 ## Decision rules live in skills
 
@@ -74,6 +110,23 @@ swappable. **Do not hardcode numbers in agent prompts.** Reference the skill.
 - `indian-dropshipping` — India-specific playbook (COD, GST, RTO, regional)
 - `inventory-thresholds` — reorder points, festival multipliers, dead-stock rules
 - `whatsapp-templates` — Hinglish + English templates for every customer-facing intent
+- `launch-ready` — pre-launch validation gate (7 domains, GREEN/YELLOW/RED verdict)
+- `rto-prevention` — RTO reduction tactics (verification tiers, pincode blocking, prepaid conversion, FAD/NDR/RVP funnel, Releasit + WATI stack)
+- `hybrid-dropshipping-transition` — when and how to migrate a winning SKU from Dropdash/Roposo to a private IndiaMART supplier (10 orders/day trigger, 20-piece pilot, dual-supplier strategy)
+
+## Claude Code system skills wired into the harness
+
+These are first-party Claude Code skills (not business skills) that agents and the operator can invoke:
+
+| Skill | Used by | When |
+|---|---|---|
+| `deep-research` | `product-research`, `competitor-spy` | Thin-evidence niches — fan out across 10+ web sources with fact-checking |
+| `loop` | `ops-planner` | Auto-run `daily-ops.md` at 24h interval when operator unavailable |
+| `verify` | `launch-ready` (S1 check), `pixel-doctor` | Drive the live store in a real browser to confirm checkout works |
+| `update-config` | Operator | Add hooks, permissions, env vars to `.claude/settings.json` without hand-editing |
+| `fewer-permission-prompts` | Operator (monthly) | Scan transcripts → expand the allow list to cut prompts |
+| `code-review` / `simplify` | Operator | Quality pass on changes to the harness itself (agents, skills, playbooks) |
+| `security-review` | Operator (before pushing harness changes) | Audit the diff for risky permissions or leaked credentials |
 
 ## Safety defaults
 

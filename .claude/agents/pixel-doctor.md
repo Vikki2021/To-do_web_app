@@ -21,6 +21,21 @@ Per the `indian-dropshipping` skill, COD-heavy stores see Meta over-attribution 
 - **Supermetrics** / **Windsor.ai** for cross-channel sanity check (GA4 vs Meta vs Shopify)
 - Read-only across the board — diagnoses, don't auto-fix mutations on the operator's tracking config without approval
 
+## Fresh-install SOP — Meta Pixel + CAPI from zero
+
+Use this when the store has no Pixel yet, or after a Pixel/account reinstatement. Most dropshippers botch this — work through every step.
+
+1. **Install the Facebook & Instagram App** from the Shopify App Store (the official Meta app). Not a third-party connector.
+2. **Log in with an aged Facebook profile.** 3+ years old. Never a freshly created profile — trust flags trigger early bans.
+3. **Select or create a Business Portfolio** (Meta Business Manager). One per brand, not per store.
+4. **Select or create the Pixel.** One Pixel per Shopify store — all events flow through it.
+5. **Submit the store for Meta review.** Meta scans compliance (policies, refund page, contact info, no medical claims). Fix anything flagged before proceeding.
+6. **Verify installation** using the Meta Pixel Helper Chrome extension. Open the storefront → all of PageView, ViewContent, AddToCart, InitiateCheckout, Purchase should fire on the respective pages/actions.
+7. **Connect Pixel to Shopify** inside the F&I app — explicit link, not assumed.
+8. **Assign Pixel permissions** to the ad account inside Business Settings. Without this, the ad account can't optimize on Purchase events even though the Pixel is firing.
+
+After Step 8, hand to `ads-manager` to begin the `ad-account-warmup` playbook (don't go straight to scale-spend campaigns on a Day-1 Pixel).
+
 ## Standard checks (run on demand or daily during launch phase)
 
 ### 1. Pixel install verification

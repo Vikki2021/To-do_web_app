@@ -6,6 +6,13 @@ import {
   ShoppingBag,
   UsersRound,
   ArrowRight,
+  Gauge,
+  Rocket,
+  Flame,
+  PhoneCall,
+  ListChecks,
+  Calculator,
+  BarChart2,
 } from 'lucide-react';
 import Link from 'next/link';
 import { Card, CardBody, CardHeader } from '@/components/Card';
@@ -19,7 +26,25 @@ import { TopAds } from '@/components/TopAds';
 import { FestivalRail } from '@/components/FestivalRail';
 import { Pill } from '@/components/Pill';
 import { SourceErrorBanner } from '@/components/SourceErrorBanner';
-import { agents as runtime, playbooks } from '@/data/mock';
+import { HealthScore } from '@/components/HealthScore';
+import { LaunchReadyGate } from '@/components/LaunchReadyGate';
+import { WarmupTracker } from '@/components/WarmupTracker';
+import { RtoLadder } from '@/components/RtoLadder';
+import { ActionQueue } from '@/components/ActionQueue';
+import { SeasonalUrgency } from '@/components/SeasonalUrgency';
+import { BecCalculator } from '@/components/BecCalculator';
+import { SkuCppTracker } from '@/components/SkuCppTracker';
+import {
+  agents as runtime,
+  playbooks,
+  healthScore,
+  launchReadiness,
+  warmup,
+  rtoLadder,
+  actionQueue,
+  seasonalAlerts,
+  skuEconomics,
+} from '@/data/mock';
 import { getAllAgents } from '@/lib/harness';
 import { getDashboardData } from '@/lib/data';
 import { formatINR, formatPct } from '@/lib/cn';
@@ -59,6 +84,7 @@ export default async function HomePage() {
   return (
     <div className="space-y-10">
       <SourceErrorBanner errors={sourceErrors} />
+      <SeasonalUrgency alerts={seasonalAlerts} />
 
       {/* Hero */}
       <section className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
@@ -141,9 +167,109 @@ export default async function HomePage() {
         />
       </section>
 
-      {/* Revenue chart + Festival rail */}
+      {/* Business health + Action queue */}
+      <section className="grid grid-cols-1 gap-4 xl:grid-cols-3">
+        <Card className="xl:col-span-2" glow>
+          <CardHeader
+            title="Business health score"
+            subtitle="5-dimension synthesis · performance-coach · /100"
+            right={<Gauge className="h-4 w-4 text-teal-300" />}
+          />
+          <CardBody>
+            <HealthScore data={healthScore} />
+          </CardBody>
+        </Card>
+
+        <Card>
+          <CardHeader
+            title="Today's action queue"
+            subtitle="Operator priorities · click ✓ to clear · hover → copy run prompt"
+            right={<ListChecks className="h-4 w-4 text-saffron-300" />}
+          />
+          <CardBody>
+            <ActionQueue items={actionQueue} />
+          </CardBody>
+        </Card>
+      </section>
+
+      {/* Launch-Ready gate */}
+      <section>
+        <Card>
+          <CardHeader
+            title="Launch-Ready gate"
+            subtitle="Pre-flight check across 7 domains · click any tile for blockers"
+            right={<Rocket className="h-4 w-4 text-saffron-300" />}
+          />
+          <CardBody>
+            <LaunchReadyGate data={launchReadiness} />
+          </CardBody>
+        </Card>
+      </section>
+
+      {/* BEC Calculator + SKU CPP tracker */}
+      <section className="grid grid-cols-1 gap-4 xl:grid-cols-2">
+        <Card>
+          <CardHeader
+            title="Unit economics calculator"
+            subtitle="Live BEC model · FAD 0.70 · RTO_cost ₹72 · Target CPP = 8% of SP"
+            right={<Calculator className="h-4 w-4 text-saffron-300" />}
+          />
+          <CardBody>
+            <BecCalculator defaultSp={1199} defaultLc={300} />
+          </CardBody>
+        </Card>
+
+        <Card>
+          <CardHeader
+            title="SKU CPP status"
+            subtitle="Actual vs target CPP · scale / hold / kill signal per product"
+            right={<BarChart2 className="h-4 w-4 text-teal-300" />}
+          />
+          <CardBody>
+            <SkuCppTracker skus={skuEconomics} />
+          </CardBody>
+        </Card>
+      </section>
+
+      {/* Warmup + RTO ladder + Festival */}
       <section className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-        <Card className="lg:col-span-2">
+        <Card>
+          <CardHeader
+            title="Ad account warmup"
+            subtitle="7-day trust build · ₹1,000/day cap"
+            right={<Flame className="h-4 w-4 text-saffron-300" />}
+          />
+          <CardBody>
+            <WarmupTracker data={warmup} />
+          </CardBody>
+        </Card>
+
+        <Card>
+          <CardHeader
+            title="COD / RTO ladder"
+            subtitle="Verification tiers by basket value"
+            right={<PhoneCall className="h-4 w-4 text-teal-300" />}
+          />
+          <CardBody>
+            <RtoLadder data={rtoLadder} />
+          </CardBody>
+        </Card>
+
+        <Card>
+          <CardHeader
+            title="Festival horizon"
+            subtitle="T-7 to T-21 windows · india-localizer"
+            right={<UsersRound className="h-4 w-4 text-ink-muted" />}
+          />
+          <CardBody>
+            <FestivalRail data={festivals} />
+          </CardBody>
+        </Card>
+      </section>
+
+      {/* Revenue chart */}
+      <section>
+        <Card>
           <CardHeader
             title="7-day revenue & spend"
             subtitle="Solid: revenue · Dashed: spend"
@@ -162,17 +288,6 @@ export default async function HomePage() {
           />
           <CardBody>
             <RevenueChart data={revenue7d} />
-          </CardBody>
-        </Card>
-
-        <Card>
-          <CardHeader
-            title="Festival horizon"
-            subtitle="Plan T-7 to T-21 windows · per india-localizer"
-            right={<UsersRound className="h-4 w-4 text-ink-muted" />}
-          />
-          <CardBody>
-            <FestivalRail data={festivals} />
           </CardBody>
         </Card>
       </section>
