@@ -11,6 +11,8 @@ import {
   Flame,
   PhoneCall,
   ListChecks,
+  Calculator,
+  BarChart2,
 } from 'lucide-react';
 import Link from 'next/link';
 import { Card, CardBody, CardHeader } from '@/components/Card';
@@ -30,6 +32,8 @@ import { WarmupTracker } from '@/components/WarmupTracker';
 import { RtoLadder } from '@/components/RtoLadder';
 import { ActionQueue } from '@/components/ActionQueue';
 import { SeasonalUrgency } from '@/components/SeasonalUrgency';
+import { BecCalculator } from '@/components/BecCalculator';
+import { SkuCppTracker } from '@/components/SkuCppTracker';
 import {
   agents as runtime,
   playbooks,
@@ -39,6 +43,7 @@ import {
   rtoLadder,
   actionQueue,
   seasonalAlerts,
+  skuEconomics,
 } from '@/data/mock';
 import { getAllAgents } from '@/lib/harness';
 import { getDashboardData } from '@/lib/data';
@@ -197,6 +202,31 @@ export default async function HomePage() {
           />
           <CardBody>
             <LaunchReadyGate data={launchReadiness} />
+          </CardBody>
+        </Card>
+      </section>
+
+      {/* BEC Calculator + SKU CPP tracker */}
+      <section className="grid grid-cols-1 gap-4 xl:grid-cols-2">
+        <Card>
+          <CardHeader
+            title="Unit economics calculator"
+            subtitle="Live BEC model · FAD 0.70 · RTO_cost ₹72 · Target CPP = 8% of SP"
+            right={<Calculator className="h-4 w-4 text-saffron-300" />}
+          />
+          <CardBody>
+            <BecCalculator defaultSp={1199} defaultLc={300} />
+          </CardBody>
+        </Card>
+
+        <Card>
+          <CardHeader
+            title="SKU CPP status"
+            subtitle="Actual vs target CPP · scale / hold / kill signal per product"
+            right={<BarChart2 className="h-4 w-4 text-teal-300" />}
+          />
+          <CardBody>
+            <SkuCppTracker skus={skuEconomics} />
           </CardBody>
         </Card>
       </section>

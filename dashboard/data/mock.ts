@@ -384,6 +384,26 @@ export type SeasonalAlert = {
   campaignLive: boolean;
 };
 
+// ─── SKU Economics (BEC tracker) ────────────────────────────────────────────
+
+export type SkuEcon = {
+  sku: string;
+  name: string;
+  sp: number;
+  lc: number;
+  actualCpp: number | null;
+  campaignStatus: 'live' | 'paused' | 'draft';
+};
+
+export const skuEconomics: SkuEcon[] = [
+  { sku: 'HP-023',  name: 'Cordless Menstrual Heating Pad', sp: 1199, lc: 300, actualCpp: null,  campaignStatus: 'draft' },
+  { sku: 'NM-001',  name: 'Portable Neck Massager',          sp: 799,  lc: 185, actualCpp: 58,    campaignStatus: 'live' },
+  { sku: 'KG-007',  name: 'One-Press Garlic Crusher',         sp: 599,  lc: 140, actualCpp: 42,    campaignStatus: 'live' },
+  { sku: 'HM-012',  name: 'Magnetic Phone Holder',            sp: 699,  lc: 160, actualCpp: 61,    campaignStatus: 'live' },
+  { sku: 'BD-004',  name: 'Beard Roller Kit',                 sp: 799,  lc: 210, actualCpp: 87,    campaignStatus: 'live' },
+  { sku: 'KT-019',  name: 'Insulated Lunchbox 1.2L',          sp: 799,  lc: 220, actualCpp: 112,   campaignStatus: 'paused' },
+];
+
 export const seasonalAlerts: SeasonalAlert[] = [
   { product: 'Neck Fan',       window: 'cooling',  daysRemaining: 18, campaignLive: false },
   { product: 'Spray Desk Fan', window: 'cooling',  daysRemaining: 18, campaignLive: false },
